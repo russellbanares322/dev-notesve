@@ -1,5 +1,13 @@
+import { Footer, Navbar } from "./components";
+
 function App() {
-  return <>App</>;
+  return (
+    <>
+      <Navbar />
+      Content
+      <Footer />
+    </>
+  );
 }
 
 export default App;
