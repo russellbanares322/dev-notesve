@@ -1,10 +1,9 @@
 import { FileCode2, PlusIcon } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
+import { UserButton } from "@clerk/clerk-react";
 
 const Navbar = () => {
-  const isLoggedIn = true;
-
   return (
     <nav className="border-b py-3">
       <div className="container flex items-center justify-between">
@@ -17,12 +16,13 @@ const Navbar = () => {
         </div>
         {/* Nav Items */}
         <div className="flex items-center gap-6">
-          {isLoggedIn && (
-            <Button className="flex items-center gap-2">
-              <PlusIcon size={17} /> Add Note
-            </Button>
-          )}
-          <ModeToggle />
+          <Button className="flex items-center gap-2">
+            <PlusIcon size={17} /> Add Note
+          </Button>
+          <div className="flex items-center gap-2 ml-5">
+            <ModeToggle />
+            <UserButton />
+          </div>
         </div>
       </div>
     </nav>
