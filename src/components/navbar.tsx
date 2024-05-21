@@ -1,8 +1,9 @@
 import { FileCode2 } from "lucide-react";
+import { ModeToggle } from "./mode-toggle";
 
 const Navbar = () => {
   return (
-    <nav>
+    <nav className="border-b py-3">
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <div>
@@ -15,6 +16,7 @@ const Navbar = () => {
         <ul className="flex items-center gap-3">
           <li>Home</li>
           <li>About</li>
+          <ModeToggle />
         </ul>
       </div>
     </nav>
