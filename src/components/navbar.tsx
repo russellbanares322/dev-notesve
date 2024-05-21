@@ -1,7 +1,10 @@
-import { FileCode2 } from "lucide-react";
+import { FileCode2, PlusIcon } from "lucide-react";
 import { ModeToggle } from "./mode-toggle";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
+  const isLoggedIn = true;
+
   return (
     <nav className="border-b py-3">
       <div className="container flex items-center justify-between">
@@ -13,11 +16,14 @@ const Navbar = () => {
           </h1>
         </div>
         {/* Nav Items */}
-        <ul className="flex items-center gap-3">
-          <li>Home</li>
-          <li>About</li>
+        <div className="flex items-center gap-6">
+          {isLoggedIn && (
+            <Button className="flex items-center gap-2">
+              <PlusIcon size={17} /> Add Note
+            </Button>
+          )}
           <ModeToggle />
-        </ul>
+        </div>
       </div>
     </nav>
   );
