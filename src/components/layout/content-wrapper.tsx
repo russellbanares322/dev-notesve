@@ -6,7 +6,9 @@ type ContentWrapperProps = {
 const ContentWrapper = ({ children }: ContentWrapperProps) => {
   return (
     <div className="flex items-start h-full gap-1 mt-10 container">
-      <Sidebar />
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
       <div>{children}</div>
     </div>
   );
