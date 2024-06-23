@@ -3,6 +3,14 @@ import { ModeToggle } from "./mode-toggle";
 import { Button } from "./ui/button";
 import { UserButton } from "@clerk/clerk-react";
 import AppLogo from "./app-logo";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./ui/dialog";
 
 const Navbar = () => {
   return (
@@ -12,9 +20,22 @@ const Navbar = () => {
         <AppLogo />
         {/* Nav Items */}
         <div className="flex items-center gap-6">
-          <Button className="flex items-center gap-2">
-            <PlusIcon size={17} /> Add Note
-          </Button>
+          <Dialog>
+            <Button className="flex items-center gap-2">
+              <PlusIcon size={17} /> Add Note
+            </Button>
+            <DialogTrigger asChild></DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                <DialogDescription>
+                  This action cannot be undone. This will permanently delete
+                  your account and remove your data from our servers.
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
           <div className="flex items-center gap-2 ml-5">
             <ModeToggle />
             <UserButton />
