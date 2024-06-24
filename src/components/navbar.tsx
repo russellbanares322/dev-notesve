@@ -11,8 +11,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
+import { useState } from "react";
 
 const Navbar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <nav className="border-b py-3">
       <div className="container flex items-center justify-between">
@@ -20,14 +23,14 @@ const Navbar = () => {
         <AppLogo />
         {/* Nav Items */}
         <div className="flex items-center gap-6">
-          <Dialog>
+          <Dialog onOpenChange={setIsModalOpen} open={isModalOpen}>
             <Button className="flex items-center gap-2">
               <PlusIcon size={17} /> Add Note
             </Button>
             <DialogTrigger asChild></DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
+                <DialogTitle>Create note</DialogTitle>
                 <DialogDescription>
                   This action cannot be undone. This will permanently delete
                   your account and remove your data from our servers.
