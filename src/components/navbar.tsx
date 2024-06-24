@@ -24,10 +24,11 @@ const Navbar = () => {
         {/* Nav Items */}
         <div className="flex items-center gap-6">
           <Dialog onOpenChange={setIsModalOpen} open={isModalOpen}>
-            <Button className="flex items-center gap-2">
-              <PlusIcon size={17} /> Add Note
-            </Button>
-            <DialogTrigger asChild></DialogTrigger>
+            <DialogTrigger asChild>
+              <Button className="flex items-center gap-2">
+                <PlusIcon size={17} /> Add Note
+              </Button>
+            </DialogTrigger>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Create note</DialogTitle>
