@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import { ContentWrapper, Footer, SignInButton } from "./components";
+import { ContentWrapper, SignInButton } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes/routes";
 
