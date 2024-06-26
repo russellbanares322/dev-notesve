@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import { ContentWrapper, Footer, Navbar, SignInButton } from "./components";
+import { ContentWrapper, Footer, SignInButton } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes/routes";
 
@@ -8,7 +8,6 @@ function App() {
     <div>
       {/* Show main page when user is authenticated */}
       <SignedIn>
-        <Navbar />
         <Routes>
           {routes.map((route) => (
             <Route
@@ -18,7 +17,6 @@ function App() {
             />
           ))}
         </Routes>
-        <Footer />
       </SignedIn>
       {/* Show login page when user is not authenticated */}
       <SignedOut>
