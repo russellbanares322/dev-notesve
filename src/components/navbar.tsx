@@ -1,4 +1,3 @@
-import { ModeToggle } from "./mode-toggle";
 import { UserButton } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
 import { ArrowLeftToLine } from "lucide-react";
@@ -14,7 +13,6 @@ const Navbar = () => {
         {/* Nav Items */}
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2 ml-5">
-            <ModeToggle />
             <UserButton />
           </div>
         </div>

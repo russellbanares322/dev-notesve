@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
-import { ContentWrapper, SignInButton } from "./components";
+import { ContentWrapper, ModeToggle, SignInButton } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes/routes";
 
@@ -22,6 +22,7 @@ function App() {
       <SignedOut>
         <SignInButton />
       </SignedOut>
+      <ModeToggle />
     </div>
   );
 }
