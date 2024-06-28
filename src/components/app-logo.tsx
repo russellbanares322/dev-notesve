@@ -1,5 +1,8 @@
 import { FileCode2 } from "lucide-react";
 
+/**
+ * TODO: Style this conditionally, depending on sidebar if it is collapsed or not
+ */
 const AppLogo = () => {
   return (
     <div className="flex items-center">
