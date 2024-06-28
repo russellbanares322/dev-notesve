@@ -2,12 +2,11 @@ import { twMerge } from "tailwind-merge";
 import AppLogo from "../app-logo";
 import { FileCode2 } from "lucide-react";
 import { truncateString } from "@/lib/truncateString";
+import { useSidebar } from "@/context/sidebar-provider";
 
-type SidebarProps = {
-  isSidebarCollapsed: boolean;
-};
+const Sidebar = () => {
+  const { isSidebarCollapsed } = useSidebar();
 
-const Sidebar = ({ isSidebarCollapsed }: SidebarProps) => {
   const renderAppLogo = isSidebarCollapsed ? (
     <FileCode2 size={20} />
   ) : (

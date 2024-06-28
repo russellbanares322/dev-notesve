@@ -1,13 +1,11 @@
 import { UserButton } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
 import { ArrowLeftToLine, ArrowRightToLine } from "lucide-react";
+import { useSidebar } from "@/context/sidebar-provider";
 
-type NavbarProps = {
-  isSidebarCollapsed: boolean;
-  toggleSidebar: () => void;
-};
+const Navbar = () => {
+  const { isSidebarCollapsed, toggleSidebar } = useSidebar();
 
-const Navbar = ({ isSidebarCollapsed, toggleSidebar }: NavbarProps) => {
   return (
     <nav className="py-3 shadow-slate-400 shadow-sm">
       <div className="flex items-center justify-between px-3">
