@@ -1,9 +1,12 @@
+import { useSidebar } from "@/context/sidebar-provider";
 import { FileCode2 } from "lucide-react";
 
-/**
- * TODO: Style this conditionally, depending on sidebar if it is collapsed or not
- */
 const AppLogo = () => {
+  const { isSidebarCollapsed } = useSidebar();
+
+  if (isSidebarCollapsed) {
+    return <FileCode2 size={20} />;
+  }
   return (
     <div className="flex items-center">
       <h1 className="flex items-center bg-black text-white px-1 border-l border-l-gray-200">

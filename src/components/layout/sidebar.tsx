@@ -1,17 +1,10 @@
 import { twMerge } from "tailwind-merge";
 import AppLogo from "../app-logo";
-import { FileCode2 } from "lucide-react";
 import { truncateString } from "@/lib/truncateString";
 import { useSidebar } from "@/context/sidebar-provider";
 
 const Sidebar = () => {
   const { isSidebarCollapsed } = useSidebar();
-
-  const renderAppLogo = isSidebarCollapsed ? (
-    <FileCode2 size={20} />
-  ) : (
-    <AppLogo />
-  );
 
   return (
     <div
@@ -22,7 +15,7 @@ const Sidebar = () => {
     >
       <div>
         <div className="flex items-center justify-center py-3">
-          {renderAppLogo}
+          <AppLogo />
         </div>
         <ul className="pl-3 mt-8 space-y-4">
           <li>{truncateString("NextJS Installationasdasdasdsa")}</li>
