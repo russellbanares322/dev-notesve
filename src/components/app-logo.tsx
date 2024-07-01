@@ -5,7 +5,15 @@ const AppLogo = () => {
   const { isSidebarCollapsed } = useSidebar();
 
   if (isSidebarCollapsed) {
-    return <FileCode2 size={20} />;
+    return (
+      <div className="flex items-center justify-center flex-col">
+        <FileCode2 size={20} />
+        <div className="flex">
+          <p className="text-[0.6rem] -translate-y-1">Dev</p>
+          <p className="text-[0.6rem]">Notesve</p>
+        </div>
+      </div>
+    );
   }
   return (
     <div className="flex items-center">
