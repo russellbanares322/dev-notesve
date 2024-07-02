@@ -8,3 +8,10 @@ export const createUser = async(createUserBody: CreateUserBody) => {
 
     return response.data
 }
+
+export const isUserExistInDb = async(user_id: string | undefined) => {
+
+    const response = await api.get(`${USERS}/is-user-exist/${user_id}`);
+
+    return response.data
+}

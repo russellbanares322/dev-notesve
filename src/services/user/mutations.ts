@@ -3,7 +3,7 @@ import { createUser } from "./user"
 import { CreateUserBody } from "./types"
 
 export const useCreateUser = () => {
-    return useMutation({
-        mutationFn: (createUserBody: CreateUserBody) => createUser(createUserBody),
-    })
+        return useMutation({
+            mutationFn: (createUserBody: CreateUserBody) => createUser(createUserBody),
+        })
 }
