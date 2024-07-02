@@ -7,6 +7,8 @@ export const getDevNotesByAuthorId =  async (author_id: string) => {
             author_id: author_id
         }
     }
-    const response = await api.get(`${DEV_NOTES}`, config);
+    
+    const response = await api.get(`${DEV_NOTES}`, config)
+
     return response.data
 }
