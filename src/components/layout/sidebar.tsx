@@ -23,7 +23,7 @@ const Sidebar = () => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>{iconElement}</TooltipTrigger>
-          <TooltipContent>
+          <TooltipContent side="right">
             <p>{title}</p>
           </TooltipContent>
         </Tooltip>
