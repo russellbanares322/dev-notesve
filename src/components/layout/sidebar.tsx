@@ -17,17 +17,41 @@ const Sidebar = () => {
   const { isSidebarCollapsed } = useSidebar();
   const { user } = useUser();
   const { data } = useGetDevNoteCategories(user?.id as string);
-  const [collapsedSidebarItems, setCollapsedSidebarItems] = useState([]);
+  const [collapsedSidebarItems, setCollapsedSidebarItems] = useState<string[]>(
+    []
+  );
 
-  const renderSidebarItemIcon = (title: string) => {
-    const iconElement = <Folder className="text-gray-300" fill="#d1d5db" />;
+  const isSidebarItemCollapsed = (category: string) => {
+    const collapsedSidebarItem = collapsedSidebarItems.includes(category);
+
+    return collapsedSidebarItem;
+  };
+
+  const handleCollapseSidebarItem = (category: string) => {
+    if (isSidebarItemCollapsed(category)) {
+      const filteredCollapsedSidebarItems = collapsedSidebarItems.filter(
+        (item) => item !== category
+      );
+      setCollapsedSidebarItems(filteredCollapsedSidebarItems);
+    } else {
+      setCollapsedSidebarItems([...collapsedSidebarItems, category]);
+    }
+  };
+
+  const renderSidebarItemIcon = (category: string) => {
+    const iconElement = (
+      <Folder
+        className="text-gray-300"
+        fill={isSidebarItemCollapsed(category) ? "" : "#d1d5db"}
+      />
+    );
 
     return isSidebarCollapsed ? (
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>{iconElement}</TooltipTrigger>
           <TooltipContent side="right">
-            <p>{title}</p>
+            <p>{category}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>
@@ -52,6 +76,7 @@ const Sidebar = () => {
             <div
               className="flex items-center gap-3 cursor-pointer pl-2"
               key={category}
+              onClick={() => handleCollapseSidebarItem(category)}
             >
               {renderSidebarItemIcon(category)}
               {!isSidebarCollapsed && (
