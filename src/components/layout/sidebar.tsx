@@ -11,14 +11,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { useState } from "react";
 
 const Sidebar = () => {
   const { isSidebarCollapsed } = useSidebar();
   const { user } = useUser();
   const { data } = useGetDevNoteCategories(user?.id as string);
+  const [collapsedSidebarItems, setCollapsedSidebarItems] = useState([]);
 
   const renderSidebarItemIcon = (title: string) => {
     const iconElement = <Folder className="text-gray-300" fill="#d1d5db" />;
+
     return isSidebarCollapsed ? (
       <TooltipProvider>
         <Tooltip>
