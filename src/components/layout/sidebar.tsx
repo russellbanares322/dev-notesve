@@ -71,10 +71,10 @@ const Sidebar = () => {
         <div className="flex items-center justify-center py-3">
           <AppLogo />
         </div>
-        <ul className="pl-3 mt-8 space-y-4">
+        <ul className="pl-1 mt-8 space-y-4">
           {data?.map((category: string) => (
             <div
-              className="flex items-center gap-3 cursor-pointer pl-2"
+              className="flex items-center gap-3 cursor-pointer pl-2 bg-slate-400"
               key={category}
               onClick={() => handleCollapseSidebarItem(category)}
             >
