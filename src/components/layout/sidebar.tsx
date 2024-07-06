@@ -1,7 +1,6 @@
 import { twMerge } from "tailwind-merge";
 import AppLogo from "../app-logo";
 import { truncateString } from "@/lib/truncateString";
-import { useSidebar } from "@/context/sidebar-provider";
 import { useUser } from "@clerk/clerk-react";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
 import { Folder } from "lucide-react";
@@ -12,9 +11,10 @@ import {
   TooltipTrigger,
 } from "../ui/tooltip";
 import { useState } from "react";
+import { useSidebarStore } from "@/store/useSidebarStore";
 
 const Sidebar = () => {
-  const { isSidebarCollapsed } = useSidebar();
+  const { isSidebarCollapsed } = useSidebarStore();
   const { user } = useUser();
   const { data } = useGetDevNoteCategories(user?.id as string);
   const [collapsedSidebarItems, setCollapsedSidebarItems] = useState<string[]>(

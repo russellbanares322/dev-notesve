@@ -1,8 +1,8 @@
-import { useSidebar } from "@/context/sidebar-provider";
+import { useSidebarStore } from "@/store/useSidebarStore";
 import { FileCode2 } from "lucide-react";
 
 const AppLogo = () => {
-  const { isSidebarCollapsed } = useSidebar();
+  const { isSidebarCollapsed } = useSidebarStore();
 
   if (isSidebarCollapsed) {
     return (
