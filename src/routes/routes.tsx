@@ -5,6 +5,5 @@ export const routes = [
     path: "/",
     name: "Home",
     element: <Home />,
-    child: [],
   },
 ];
