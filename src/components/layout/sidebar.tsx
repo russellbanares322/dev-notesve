@@ -12,6 +12,7 @@ import {
 } from "../ui/tooltip";
 import { useState } from "react";
 import { useSidebarStore } from "@/store/useSidebarStore";
+import { DevNoteDisplay } from "@/pages";
 
 const Sidebar = () => {
   const { isSidebarCollapsed } = useSidebarStore();
@@ -34,6 +35,7 @@ const Sidebar = () => {
       );
       setCollapsedSidebarItems(filteredCollapsedSidebarItems);
     } else {
+      1;
       setCollapsedSidebarItems([...collapsedSidebarItems, category]);
     }
   };
@@ -71,19 +73,22 @@ const Sidebar = () => {
         <div className="flex items-center justify-center py-3">
           <AppLogo />
         </div>
-        <ul className="pl-1 mt-8 space-y-4">
+        <ul className="pl-1 mt-5 space-y-4">
           {data?.map((category: string) => (
             <div
-              className="flex items-center gap-3 cursor-pointer pl-2 bg-slate-400"
+              className="space-y-3"
               key={category}
               onClick={() => handleCollapseSidebarItem(category)}
             >
-              {renderSidebarItemIcon(category)}
-              {!isSidebarCollapsed && (
-                <li className="text-sm text-gray-300 hover:text-white">
-                  {truncateString(category)}
-                </li>
-              )}
+              <div className="flex items-center gap-3 cursor-pointer pl-4">
+                {renderSidebarItemIcon(category)}
+                {!isSidebarCollapsed && (
+                  <li className="text-sm text-gray-300 hover:text-white">
+                    {truncateString(category)}
+                  </li>
+                )}
+              </div>
+              <DevNoteDisplay category={category} />
             </div>
           ))}
         </ul>

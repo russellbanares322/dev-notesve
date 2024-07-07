@@ -4,7 +4,7 @@ import { getDevNoteCategories, getDevNotesByAuthorId } from "./devnote"
 export const useGetDevNotesByAuthorId = (author_id: string) => {
     return useQuery({
         queryFn: () => getDevNotesByAuthorId(author_id),
-        queryKey: ["Devnotes"]
+        queryKey: ["Devnotes", author_id]
     })
 }
 
