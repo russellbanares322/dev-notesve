@@ -2,11 +2,11 @@ import { truncateString } from "@/lib/truncateString";
 import { useGetDevNotesByAuthorId } from "@/services/devnote/queries";
 import { useUser } from "@clerk/clerk-react";
 
-type DevNoteDisplayProps = {
+type DevNotesSidebarDisplayProps = {
   category: string;
 };
 
-const DevNoteDisplay = ({ category }: DevNoteDisplayProps) => {
+const DevNotesSidebarDisplay = ({ category }: DevNotesSidebarDisplayProps) => {
   const { user } = useUser();
 
   const { data } = useGetDevNotesByAuthorId(user?.id as string);
@@ -23,4 +23,4 @@ const DevNoteDisplay = ({ category }: DevNoteDisplayProps) => {
   );
 };
 
-export default DevNoteDisplay;
+export default DevNotesSidebarDisplay;

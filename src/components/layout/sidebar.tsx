@@ -12,7 +12,7 @@ import {
 } from "../ui/tooltip";
 import { useState } from "react";
 import { useSidebarStore } from "@/store/useSidebarStore";
-import { DevNoteDisplay } from "@/pages";
+import { DevNotesSidebarDisplay } from "@/pages";
 
 const Sidebar = () => {
   const { isSidebarCollapsed } = useSidebarStore();
@@ -89,7 +89,7 @@ const Sidebar = () => {
                 )}
               </div>
               {isSidebarItemCollapsed(category) && (
-                <DevNoteDisplay category={category} />
+                <DevNotesSidebarDisplay category={category} />
               )}
             </div>
           ))}
