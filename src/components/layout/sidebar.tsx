@@ -76,7 +76,7 @@ const Sidebar = () => {
         <ul className="pl-1 mt-5 space-y-4">
           {data?.map((category: string) => (
             <div
-              className="space-y-3"
+              className="space-y-4"
               key={category}
               onClick={() => handleCollapseSidebarItem(category)}
             >
@@ -88,7 +88,9 @@ const Sidebar = () => {
                   </li>
                 )}
               </div>
-              <DevNoteDisplay category={category} />
+              {isSidebarItemCollapsed(category) && (
+                <DevNoteDisplay category={category} />
+              )}
             </div>
           ))}
         </ul>

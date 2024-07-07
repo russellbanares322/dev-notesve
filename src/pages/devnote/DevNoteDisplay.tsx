@@ -13,9 +13,9 @@ const DevNoteDisplay = ({ category }: DevNoteDisplayProps) => {
   const filteredDevNotes = data?.filter((note) => note.category === category);
 
   return (
-    <ul>
+    <ul className="space-y-2">
       {filteredDevNotes?.map((note) => (
-        <li className="text-sm" key={note.devnote_id}>
+        <li className="text-sm ml-7 cursor-pointer" key={note.devnote_id}>
           {truncateString(note.title)}
         </li>
       ))}
