@@ -1,5 +1,13 @@
+import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
+
 const Home = () => {
-  return <div className="container min-h-screen h-full">Add data here</div>;
+  const { selectedDevNotes } = useDisplayDevNotesStore();
+
+  return (
+    <div className="container min-h-screen h-full">
+      {JSON.stringify(selectedDevNotes)}
+    </div>
+  );
 };
 
 export default Home;
