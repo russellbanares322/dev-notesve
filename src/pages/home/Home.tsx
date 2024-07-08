@@ -1,12 +1,6 @@
-import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
-
 const Home = () => {
-  const { selectedDevNotes } = useDisplayDevNotesStore();
-
   return (
-    <div className="container min-h-screen h-full">
-      {JSON.stringify(selectedDevNotes)}
-    </div>
+    <div className="container min-h-screen h-full">Display DevNotes Here</div>
   );
 };
 
