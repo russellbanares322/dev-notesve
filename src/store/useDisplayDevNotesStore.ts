@@ -7,11 +7,18 @@ type DisplayDevNotesStore = {
     onRemoveDevNote: (devNoteId: string) => void
 }
 
-export const useDisplayDevNotesStore = create<DisplayDevNotesStore>((set) => ({
+export const useDisplayDevNotesStore = create<DisplayDevNotesStore>((set, get) => ({
     selectedDevNotes: [],
-    onSelectDevNote: (devNote) => set((state) => ({
-        selectedDevNotes: [...state.selectedDevNotes, devNote]
-    })),
+    onSelectDevNote: (devNote)  => {
+        const prevSelectedDevNotesValue = get().selectedDevNotes
+        const isDevNoteSaved = prevSelectedDevNotesValue.some((note) => note.devnote_id === devNote.devnote_id);
+        
+        if(!isDevNoteSaved){
+            set({
+                selectedDevNotes: [...prevSelectedDevNotesValue, devNote]
+            })
+        }
+    },
     onRemoveDevNote: (devNoteId) => set((state) => ({
         selectedDevNotes: state.selectedDevNotes.filter((devNote) => devNote.devnote_id !== devNoteId)
     }))
