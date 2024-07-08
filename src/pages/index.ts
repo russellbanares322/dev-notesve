@@ -1,4 +1,4 @@
-import DevNotesSidebarDisplay from "./devnote/DevNotesSidebarDisplay";
+import DevNotesFileDisplay from "./devnote/DevNotesFileDisplay";
 import Home from "./home/Home";
 
-export { DevNotesSidebarDisplay, Home }
+export { DevNotesFileDisplay, Home }

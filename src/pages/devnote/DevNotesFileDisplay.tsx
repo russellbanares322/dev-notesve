@@ -3,11 +3,11 @@ import { useGetDevNotesByAuthorId } from "@/services/devnote/queries";
 import { useUser } from "@clerk/clerk-react";
 import { File } from "lucide-react";
 
-type DevNotesSidebarDisplayProps = {
+type DevNotesFileDisplayProps = {
   category: string;
 };
 
-const DevNotesSidebarDisplay = ({ category }: DevNotesSidebarDisplayProps) => {
+const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
   const { user } = useUser();
 
   const { data } = useGetDevNotesByAuthorId(user?.id as string);
@@ -20,12 +20,12 @@ const DevNotesSidebarDisplay = ({ category }: DevNotesSidebarDisplayProps) => {
           className="flex ml-3 items-end gap-3 cursor-pointer"
           key={note.devnote_id}
         >
-          <File size={18} />
-          <li className="text-xs">{truncateString(note.title)}</li>
+          <File size={20} className="text-gray-500" />
+          <li className="text-sm">{truncateString(note.title)}</li>
         </div>
       ))}
     </ul>
   );
 };
 
-export default DevNotesSidebarDisplay;
+export default DevNotesFileDisplay;
