@@ -1,9 +1,8 @@
 import { twMerge } from "tailwind-merge";
-import AppLogo from "../app-logo";
 import { truncateString } from "@/lib/truncateString";
 import { useUser } from "@clerk/clerk-react";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
-import { Folder } from "lucide-react";
+import { ChevronDown, Folder } from "lucide-react";
 import {
   Tooltip,
   TooltipContent,
@@ -18,25 +17,32 @@ const Sidebar = () => {
   const { isSidebarCollapsed } = useSidebarStore();
   const { user } = useUser();
   const { data } = useGetDevNoteCategories(user?.id as string);
-  const [collapsedSidebarItems, setCollapsedSidebarItems] = useState<string[]>(
-    []
-  );
+  // This state is for dynamically showing each individual sidebar file
+  const [collapsedSidebarFolders, setCollapsedSidebarFolders] = useState<
+    string[]
+  >([]);
+  // This state is for dynamically showing all of the sidebar folder
+  const [showSidebarFolders, setShowSidebarFolders] = useState(true);
 
-  const isSidebarItemCollapsed = (category: string) => {
-    const collapsedSidebarItem = collapsedSidebarItems.includes(category);
+  const isSidebarFolderCollapsed = (category: string) => {
+    const collapsedSidebarItem = collapsedSidebarFolders.includes(category);
 
     return collapsedSidebarItem;
   };
 
+  const toggleSidebarFoldersVisibility = () => {
+    setShowSidebarFolders((prev) => !prev);
+  };
+
   const handleCollapseSidebarItem = (category: string) => {
-    if (isSidebarItemCollapsed(category)) {
-      const filteredCollapsedSidebarItems = collapsedSidebarItems.filter(
+    if (isSidebarFolderCollapsed(category)) {
+      const filteredCollapsedSidebarItems = collapsedSidebarFolders.filter(
         (item) => item !== category
       );
-      setCollapsedSidebarItems(filteredCollapsedSidebarItems);
+      setCollapsedSidebarFolders(filteredCollapsedSidebarItems);
     } else {
       1;
-      setCollapsedSidebarItems([...collapsedSidebarItems, category]);
+      setCollapsedSidebarFolders([...collapsedSidebarFolders, category]);
     }
   };
 
@@ -44,7 +50,7 @@ const Sidebar = () => {
     const iconElement = (
       <Folder
         className="text-gray-300"
-        fill={isSidebarItemCollapsed(category) ? "" : "#d1d5db"}
+        fill={isSidebarFolderCollapsed(category) ? "" : "#d1d5db"}
       />
     );
 
@@ -69,15 +75,26 @@ const Sidebar = () => {
         "p-2 shadow-slate-400 shadow-sm mr-[1px] duration-500 ease-in-out"
       )}
     >
-      <div>
-        <div className="flex items-center justify-center py-3">
-          <AppLogo />
+      <div className="pt-16">
+        <div
+          className="flex gap-1 mb-2 cursor-pointer"
+          onClick={toggleSidebarFoldersVisibility}
+        >
+          <ChevronDown className="-translate-y-[1.5px]" />
+          <p className="text-sm text-gray-300">DEV-NOTESVE</p>
         </div>
-        <ul className="pl-1 mt-5 space-y-4">
+        <ul
+          className={twMerge(
+            showSidebarFolders
+              ? "translate-y-[1px] opacity-100"
+              : "-translate-y-5 opacity-0 pointer-events-none",
+            "pl-4 space-y-4 duration-300 ease-in-out"
+          )}
+        >
           {data?.map((category: string) => (
             <div className="space-y-4" key={category}>
               <div onClick={() => handleCollapseSidebarItem(category)}>
-                <div className="flex items-center gap-3 cursor-pointer pl-4">
+                <div className="flex items-center gap-3 cursor-pointer">
                   {renderSidebarItemIcon(category)}
                   {!isSidebarCollapsed && (
                     <li className="text-sm text-gray-300 hover:text-white">
@@ -86,7 +103,7 @@ const Sidebar = () => {
                   )}
                 </div>
               </div>
-              {isSidebarItemCollapsed(category) && (
+              {isSidebarFolderCollapsed(category) && (
                 <DevNotesSidebarDisplay category={category} />
               )}
             </div>
