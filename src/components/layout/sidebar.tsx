@@ -75,18 +75,16 @@ const Sidebar = () => {
         </div>
         <ul className="pl-1 mt-5 space-y-4">
           {data?.map((category: string) => (
-            <div
-              className="space-y-4"
-              key={category}
-              onClick={() => handleCollapseSidebarItem(category)}
-            >
-              <div className="flex items-center gap-3 cursor-pointer pl-4">
-                {renderSidebarItemIcon(category)}
-                {!isSidebarCollapsed && (
-                  <li className="text-sm text-gray-300 hover:text-white">
-                    {truncateString(category)}
-                  </li>
-                )}
+            <div className="space-y-4" key={category}>
+              <div onClick={() => handleCollapseSidebarItem(category)}>
+                <div className="flex items-center gap-3 cursor-pointer pl-4">
+                  {renderSidebarItemIcon(category)}
+                  {!isSidebarCollapsed && (
+                    <li className="text-sm text-gray-300 hover:text-white">
+                      {truncateString(category)}
+                    </li>
+                  )}
+                </div>
               </div>
               {isSidebarItemCollapsed(category) && (
                 <DevNotesSidebarDisplay category={category} />

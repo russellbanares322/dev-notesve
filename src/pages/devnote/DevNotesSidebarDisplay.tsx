@@ -1,6 +1,7 @@
 import { truncateString } from "@/lib/truncateString";
 import { useGetDevNotesByAuthorId } from "@/services/devnote/queries";
 import { useUser } from "@clerk/clerk-react";
+import { File } from "lucide-react";
 
 type DevNotesSidebarDisplayProps = {
   category: string;
@@ -15,9 +16,13 @@ const DevNotesSidebarDisplay = ({ category }: DevNotesSidebarDisplayProps) => {
   return (
     <ul className="space-y-2">
       {filteredDevNotes?.map((note) => (
-        <li className="text-sm ml-7 cursor-pointer" key={note.devnote_id}>
-          {truncateString(note.title)}
-        </li>
+        <div
+          className="flex ml-7 items-end gap-3 cursor-pointer hover:text-white"
+          key={note.devnote_id}
+        >
+          <File size={18} />
+          <li className="text-xs">{truncateString(note.title)}</li>
+        </div>
       ))}
     </ul>
   );
