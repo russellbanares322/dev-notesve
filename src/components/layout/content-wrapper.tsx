@@ -1,5 +1,4 @@
 import Footer from "../footer";
-import Navbar from "../navbar";
 import Sidebar from "./sidebar";
 
 type ContentWrapperProps = {
@@ -14,7 +13,6 @@ const ContentWrapper = ({ children }: ContentWrapperProps) => {
         <Sidebar />
         {/* Content */}
         <div className="flex flex-col w-full">
-          <Navbar />
           <div className="p-5">{children}</div>
         </div>
       </div>

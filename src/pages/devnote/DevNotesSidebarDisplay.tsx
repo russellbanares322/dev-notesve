@@ -17,7 +17,7 @@ const DevNotesSidebarDisplay = ({ category }: DevNotesSidebarDisplayProps) => {
     <ul className="space-y-2">
       {filteredDevNotes?.map((note) => (
         <div
-          className="flex ml-3 items-end gap-3 cursor-pointer hover:text-white"
+          className="flex ml-3 items-end gap-3 cursor-pointer"
           key={note.devnote_id}
         >
           <File size={18} />
