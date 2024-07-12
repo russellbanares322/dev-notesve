@@ -8,7 +8,7 @@ const DevNoteDetailsDisplay = () => {
     <div className="flex items-center gap-2">
       {selectedDevNotes?.map((note) => (
         <div
-          className="cursor-pointer relative mr-3 group flex items-center gap-1"
+          className="group cursor-pointer relative mr-3 flex items-center gap-1"
           key={note.devnote_id}
         >
           <p className="text-sm">{note.title}</p>
