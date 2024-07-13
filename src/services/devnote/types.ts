@@ -1,5 +1,5 @@
 export type DevNotes = {
-    devnote_id : string
+    devnote_id : number
     title: string
     category: string
     content: string
