@@ -5,9 +5,15 @@ type DisplayDevNotesStore = {
     selectedDevNotes: DevNotes[] | [],
     onSelectDevNote: (devNote: DevNotes) => void,
     onRemoveDevNote: (devNoteId: string) => void,
+    currentlyViewingDevNote: string | null;
+    onViewDevNote: (devNoteId: string) => void;
 }
 
 export const useDisplayDevNotesStore = create<DisplayDevNotesStore>((set, get) => ({
+    currentlyViewingDevNote: null,
+    onViewDevNote: (devNoteId) => set(() => ({
+        currentlyViewingDevNote: devNoteId
+    })),
     selectedDevNotes: [],
     onSelectDevNote: (devNote)  => {
         const prevSelectedDevNotesValue = get().selectedDevNotes
