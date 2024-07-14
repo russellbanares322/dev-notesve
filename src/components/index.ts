@@ -5,6 +5,4 @@ import SignInButton from "./sign-in-button";
 import AppLogo from "./app-logo";
 import ContentWrapper from "./layout/content-wrapper";
 
-
-
 export { Button, ContentWrapper, Footer, ModeToggle, SignInButton, AppLogo }
