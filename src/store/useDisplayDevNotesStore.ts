@@ -4,7 +4,7 @@ import { create } from 'zustand'
 type DisplayDevNotesStore = {
     selectedDevNotes: DevNotes[] | [],
     onSelectDevNote: (devNote: DevNotes) => void,
-    onRemoveDevNote: (devNoteId: number) => void,
+    onRemoveDevNote: (devNoteId: number, index: number) => void,
     currentlyViewingDevNote: number | null;
     onViewDevNote: (devNoteId: number) => void;
 }
@@ -29,7 +29,22 @@ export const useDisplayDevNotesStore = create<DisplayDevNotesStore>((set, get) =
             currentlyViewingDevNote: devNote.devnote_id
         })
     },
-    onRemoveDevNote: (devNoteId) => set((state) => ({
-        selectedDevNotes: state.selectedDevNotes.filter((devNote) => devNote.devnote_id !== devNoteId)
-    })),
+    onRemoveDevNote: (devNoteId, index) => {
+        const selectedDevNotesValue = get().selectedDevNotes
+        const selectedDevNotesLength = selectedDevNotesValue.length 
+        const isSelectedDevNotesEmpty = selectedDevNotesLength === 0;
+
+        // For getting the new viewed dev note
+        const firstDevNote = index === 0;
+        const indexOfNoteThatWillBeRemoved = selectedDevNotesLength === 2 && firstDevNote ? index + 1 : index - 1;
+        const newViewingDevNote = selectedDevNotesValue[indexOfNoteThatWillBeRemoved]?.devnote_id;
+
+        // For filtering previously selected devnotes that were being displayed
+        const filteredSelectedDevNotes = selectedDevNotesValue.filter((note) => note.devnote_id !== devNoteId)
+        set({
+            currentlyViewingDevNote: isSelectedDevNotesEmpty ? null : newViewingDevNote,
+            selectedDevNotes:  filteredSelectedDevNotes,
+        })
+     
+    },
 }))

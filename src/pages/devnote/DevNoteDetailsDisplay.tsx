@@ -12,7 +12,7 @@ const DevNoteDetailsDisplay = () => {
 
   return (
     <div className="flex items-center gap-2">
-      {selectedDevNotes?.map((note) => {
+      {selectedDevNotes?.map((note, index) => {
         const isItemCurrentlyViewing =
           currentlyViewingDevNote === note.devnote_id;
 
@@ -28,8 +28,11 @@ const DevNoteDetailsDisplay = () => {
             <p className="text-sm">{note.title}</p>
             <X
               size={17}
-              className="hidden group-hover:block group-hover:absolute group-hover:-right-[20px]"
-              onClick={() => onRemoveDevNote(note.devnote_id)}
+              className="absolute -right-[20px]"
+              onClick={(e) => {
+                e.stopPropagation();
+                onRemoveDevNote(note.devnote_id, index);
+              }}
             />
           </div>
         );
