@@ -2,7 +2,7 @@ import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
 import { X } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
-const DevNoteDetailsDisplay = () => {
+const SelectedDevNoteTab = () => {
   const {
     selectedDevNotes,
     onRemoveDevNote,
@@ -41,4 +41,4 @@ const DevNoteDetailsDisplay = () => {
   );
 };
 
-export default DevNoteDetailsDisplay;
+export default SelectedDevNoteTab;

@@ -1,6 +1,5 @@
 import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
-import DevNoteDetailsDisplay from "../devnote/DevNoteDetailsDisplay";
-import { AppLogo, Button } from "@/components";
+import { AppLogo, Button, SelectedDevNoteTab } from "@/components";
 import { FilePlus2 } from "lucide-react";
 
 const Home = () => {
@@ -17,7 +16,7 @@ const Home = () => {
           </Button>
         </div>
       )}
-      {!isSelectedDevNotesEmpty && <DevNoteDetailsDisplay />}
+      {!isSelectedDevNotesEmpty && <SelectedDevNoteTab />}
     </div>
   );
 };

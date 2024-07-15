@@ -5,7 +5,7 @@ import { useGetDevNoteCategories } from "@/services/devnote/queries";
 import { ChevronDown, ChevronRight, Folder } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "@/context/theme-provider";
-import { DevNotesFileDisplay } from "@/pages";
+import DevNotesFileDisplay from "../devnote-files-display";
 
 const Sidebar = () => {
   const { user } = useUser();

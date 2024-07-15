@@ -24,19 +24,29 @@ function App() {
     }
   }, [doesUserExist, isSignedIn]);
 
+  const renderRoutes = () => {
+    return routes.map((route) => (
+      <Route
+        key={route.path}
+        path={route.path}
+        element={<ContentWrapper>{route.element}</ContentWrapper>}
+      >
+        {route?.child?.map((childRoute) => (
+          <Route
+            key={childRoute.path}
+            path={childRoute.path}
+            element={childRoute.element}
+          />
+        ))}
+      </Route>
+    ));
+  };
+
   return (
     <div>
       {/* Show main page when user is authenticated */}
       <SignedIn>
-        <Routes>
-          {routes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
-              element={<ContentWrapper>{route.element}</ContentWrapper>}
-            />
-          ))}
-        </Routes>
+        <Routes>{renderRoutes()}</Routes>
       </SignedIn>
       {/* Show login page when user is not authenticated */}
       <SignedOut>
