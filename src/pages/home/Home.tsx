@@ -1,6 +1,7 @@
 import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
 import { AppLogo, Button, SelectedDevNoteTab } from "@/components";
 import { FilePlus2 } from "lucide-react";
+import { Outlet } from "react-router-dom";
 
 const Home = () => {
   const { selectedDevNotes } = useDisplayDevNotesStore();
@@ -17,6 +18,7 @@ const Home = () => {
         </div>
       )}
       {!isSelectedDevNotesEmpty && <SelectedDevNoteTab />}
+      <Outlet />
     </div>
   );
 };
