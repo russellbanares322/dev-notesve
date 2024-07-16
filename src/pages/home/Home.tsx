@@ -18,6 +18,7 @@ const Home = () => {
         </div>
       )}
       {!isSelectedDevNotesEmpty && <SelectedDevNoteTab />}
+      {/* Render selected dev note and implement crud action */}
       <Outlet />
     </div>
   );
