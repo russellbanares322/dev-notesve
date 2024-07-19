@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getDevNoteCategories, getDevNotesByAuthorId } from "./devnote"
+import { getDevNote, getDevNoteCategories, getDevNotesByAuthorId } from "./devnote"
 
 export const useGetDevNotesByAuthorId = (author_id: string) => {
     return useQuery({
@@ -8,8 +8,12 @@ export const useGetDevNotesByAuthorId = (author_id: string) => {
     })
 }
 
-// export const useGetDevNote = () => {
-// }
+export const useGetDevNote = (devnote_id: string) => {
+    return useQuery({
+        queryFn: () => getDevNote(devnote_id),
+        queryKey: ["Devnotes", devnote_id]
+    })
+}
 
 
 export const useGetDevNoteCategories = (author_id: string) => {
