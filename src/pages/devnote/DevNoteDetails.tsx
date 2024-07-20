@@ -14,6 +14,9 @@ const DevNoteDetails = () => {
           {moment(data?.date_created)?.format("LLL")}
         </span>
       </div>
+      <div>
+        <p>{data?.content}</p>
+      </div>
     </div>
   );
 };
