@@ -26,7 +26,7 @@ export const getDevNoteCategories = async (author_id: string): Promise<DevNotesC
     return response.data
 }
 
-export const getDevNote = async  (devnote_id: string) => {
+export const getDevNote = async  (devnote_id: string): Promise<DevNotes> => {
     const response = await api.get(`${DEV_NOTES}/${devnote_id}`);
 
     return response.data
