@@ -10,26 +10,26 @@ import {
 
 type DialogProps = {
   buttonTrigger: React.ReactNode;
-  content: React.ReactNode;
-  isModalOpen: boolean;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  children: React.ReactNode;
+  open: boolean;
+  onOpenChange: Dispatch<SetStateAction<boolean>>;
   title: string;
 };
 
 const Dialog = ({
   buttonTrigger,
-  content,
-  isModalOpen,
-  setIsModalOpen,
+  children,
+  open,
+  onOpenChange,
   title,
 }: DialogProps) => {
   return (
-    <ShadCnDialog onOpenChange={setIsModalOpen} open={isModalOpen}>
+    <ShadCnDialog onOpenChange={onOpenChange} open={open}>
       <ShadCnDialogTrigger asChild>{buttonTrigger}</ShadCnDialogTrigger>
       <ShadCnDialogContent>
         <ShadCnDialogHeader>
           <ShadCnDialogTitle>{title}</ShadCnDialogTitle>
-          <ShadCnDialogDescription>{content}</ShadCnDialogDescription>
+          <ShadCnDialogDescription>{children}</ShadCnDialogDescription>
         </ShadCnDialogHeader>
       </ShadCnDialogContent>
     </ShadCnDialog>
