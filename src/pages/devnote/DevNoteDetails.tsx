@@ -10,8 +10,11 @@ const DevNoteDetails = () => {
     <div className="mt-5">
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-xl font-semibold">{data?.title?.toUpperCase()}</h1>
-        <span className="font-normal text-xs">
-          {moment(data?.date_created)?.format("LLL")}
+        <span className="font-light text-xs">
+          Date Created:{" "}
+          <span className="font-medium">
+            {moment(data?.date_created)?.format("LLL")}
+          </span>
         </span>
       </div>
       <div>
