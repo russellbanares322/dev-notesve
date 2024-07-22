@@ -14,6 +14,14 @@ import {
 import { DevNotes } from "@/services/devnote/types";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -22,8 +30,12 @@ type CreateUpdateNoteModalProps = {
 type CreateNoteInputs = Pick<DevNotes, "title" | "category" | "content">;
 
 const CreateUpdateNoteSchema = z.object({
-  title: z.string(),
-  category: z.string(),
+  title: z.string({
+    required_error: "Title is required.",
+  }),
+  category: z.string({
+    required_error: "Category is required.",
+  }),
   content: z.string(),
 });
 
@@ -36,7 +48,7 @@ const CreateUpdateNoteModal = ({
   });
 
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
-    console.log(data);
+    alert(JSON.stringify(data));
   };
 
   return (
@@ -47,7 +59,11 @@ const CreateUpdateNoteModal = ({
       onOpenChange={setIsModalOpen}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form
+          className="flex flex-col gap-2"
+          onSubmit={form.handleSubmit(onSubmit)}
+        >
+          {/* Title */}
           <FormField
             control={form.control}
             name="title"
@@ -64,6 +80,50 @@ const CreateUpdateNoteModal = ({
               </FormItem>
             )}
           />
+          {/* Category */}
+          <FormField
+            control={form.control}
+            name="category"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Category</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Please select the category of your note..." />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="apple">Apple</SelectItem>
+                      <SelectItem value="banana">Banana</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {/* Title */}
+          {/* <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Please input the title of your note..."
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
           <Button type="submit">Submit</Button>
         </form>
       </Form>
