@@ -1,17 +1,15 @@
-import { Dispatch, SetStateAction } from "react";
+import { useState } from "react";
 import Dialog from "./dialog";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
-  isModalOpen: boolean;
-  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 const CreateUpdateNoteModal = ({
   buttonTrigger,
-  isModalOpen,
-  setIsModalOpen,
 }: CreateUpdateNoteModalProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Dialog
       buttonTrigger={buttonTrigger}
