@@ -2,10 +2,18 @@ import { twMerge } from "tailwind-merge";
 import { truncateString } from "@/lib/truncateString";
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
-import { ChevronDown, ChevronRight, Folder } from "lucide-react";
+import { ChevronDown, ChevronRight, FilePlus2, Folder } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "@/context/theme-provider";
 import DevNotesFileDisplay from "../devnote-files-display";
+import { Button } from "../ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+import CreateUpdateNoteModal from "../create-update-note-modal";
 
 const Sidebar = () => {
   const { user } = useUser();
@@ -49,17 +57,35 @@ const Sidebar = () => {
           </p>
           <UserButton />
         </div>
-        <div
-          className="flex gap-1 mb-2 cursor-pointer"
-          onClick={toggleSidebarFoldersVisibility}
-        >
-          {!showSidebarFolders && (
-            <ChevronRight className="-translate-y-[1.5px]" />
-          )}
-          {showSidebarFolders && (
-            <ChevronDown className="-translate-y-[1.5px]" />
-          )}
-          <p className="text-sm font-semibold">DEV-NOTESVE</p>
+        <div className="flex items-center justify-between mb-2">
+          <div
+            className="flex gap-1 cursor-pointer"
+            onClick={toggleSidebarFoldersVisibility}
+          >
+            {!showSidebarFolders && (
+              <ChevronRight className="-translate-y-[1.5px]" />
+            )}
+            {showSidebarFolders && (
+              <ChevronDown className="-translate-y-[1.5px]" />
+            )}
+            <p className="text-sm font-semibold">DEV-NOTESVE</p>
+          </div>
+          <TooltipProvider>
+            <Tooltip>
+              <CreateUpdateNoteModal
+                buttonTrigger={
+                  <TooltipTrigger asChild>
+                    <Button variant="ghost" size="sm">
+                      <FilePlus2 size={15} />
+                    </Button>
+                  </TooltipTrigger>
+                }
+              />
+              <TooltipContent>
+                <p>Create new note</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
         <ul
           className={twMerge(

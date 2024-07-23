@@ -48,7 +48,7 @@ const CreateUpdateNoteModal = ({
   });
 
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
-    alert(JSON.stringify(data));
+    console.log(data);
   };
 
   return (
@@ -73,7 +73,8 @@ const CreateUpdateNoteModal = ({
                 <FormControl>
                   <Input
                     placeholder="Please input the title of your note..."
-                    {...field}
+                    onChange={field.onChange}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />
