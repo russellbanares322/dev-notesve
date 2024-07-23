@@ -1,8 +1,9 @@
 import { useGetDevNote } from "@/services/devnote/queries";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { Dot } from "lucide-react";
+import { Dot, FilePenLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components";
 
 const DevNoteDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,12 +12,17 @@ const DevNoteDetails = () => {
   return (
     <div className="mt-5">
       <div className="flex flex-col items-center justify-start">
-        <div className="flex items-center">
-          <h1 className="text-xl font-semibold">
-            {data?.title?.toUpperCase()}
-          </h1>
-          <Dot />
-          <Badge>{data?.category}</Badge>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center">
+            <Badge>{data?.category}</Badge>
+            <Dot />
+            <h1 className="text-xl font-semibold">
+              {data?.title?.toUpperCase()}
+            </h1>
+          </div>
+          <Button variant="ghost" size="sm">
+            <FilePenLine size={20} />
+          </Button>
         </div>
         <span className="font-light text-xs">
           Date Created:{" "}
