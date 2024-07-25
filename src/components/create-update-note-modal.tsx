@@ -22,6 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import AceEditor from "react-ace";
+import "ace-builds/src-noconflict/theme-solarized_dark";
+import "ace-builds/src-noconflict/mode-javascript";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -108,23 +111,22 @@ const CreateUpdateNoteModal = ({
               </FormItem>
             )}
           />
-          {/* Title */}
-          {/* <FormField
-            control={form.control}
-            name="title"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Please input the title of your note..."
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          /> */}
+          {/* Code Snippet */}
+          <div className="space-y-2">
+            <FormLabel>Code Snippet</FormLabel>
+            <AceEditor
+              mode="javascript"
+              theme="solarized_dark"
+              name="content"
+              fontSize={14}
+              lineHeight={19}
+              showPrintMargin={false}
+              showGutter={false}
+              highlightActiveLine={false}
+              width="29rem"
+              style={{ borderRadius: ".3rem" }}
+            />
+          </div>
           <Button type="submit">Submit</Button>
         </form>
       </Form>
