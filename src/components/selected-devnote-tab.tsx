@@ -1,5 +1,6 @@
 import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
 const SelectedDevNoteTab = () => {
@@ -9,6 +10,12 @@ const SelectedDevNoteTab = () => {
     currentlyViewingDevNote,
     onViewDevNote,
   } = useDisplayDevNotesStore();
+  const navigate = useNavigate();
+
+  const handleViewDevNote = (devNoteId: number) => {
+    onViewDevNote(devNoteId);
+    navigate(`devnote/${devNoteId}`);
+  };
 
   return (
     <div className="flex items-center gap-2">
@@ -23,7 +30,7 @@ const SelectedDevNoteTab = () => {
               "group cursor-pointer mt-5 relative mr-5 flex items-center gap-1 pb-1"
             )}
             key={note.devnote_id}
-            onClick={() => onViewDevNote(note.devnote_id)}
+            onClick={() => handleViewDevNote(note.devnote_id)}
           >
             <p className="text-sm">{note.title}</p>
             <X

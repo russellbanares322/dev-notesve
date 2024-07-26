@@ -3,6 +3,7 @@ import { create } from 'zustand'
 
 type DisplayDevNotesStore = {
     selectedDevNotes: DevNotes[] | [],
+    isSelectedDevNotesEmpty: boolean,
     onSelectDevNote: (devNote: DevNotes) => void,
     onRemoveDevNote: (devNoteId: number, index: number) => void,
     currentlyViewingDevNote: number | null;
@@ -11,6 +12,7 @@ type DisplayDevNotesStore = {
 
 export const useDisplayDevNotesStore = create<DisplayDevNotesStore>((set, get) => ({
     currentlyViewingDevNote: null,
+    isSelectedDevNotesEmpty: get()?.selectedDevNotes?.length === 0,
     onViewDevNote: (devNoteId) => set(() => ({
         currentlyViewingDevNote: devNoteId
     })),
@@ -45,6 +47,5 @@ export const useDisplayDevNotesStore = create<DisplayDevNotesStore>((set, get) =
             currentlyViewingDevNote: isSelectedDevNotesEmpty ? null : newViewingDevNote,
             selectedDevNotes:  filteredSelectedDevNotes,
         })
-     
     },
 }))

@@ -9,8 +9,7 @@ import { FilePlus2 } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
 const Home = () => {
-  const { selectedDevNotes } = useDisplayDevNotesStore();
-  const isSelectedDevNotesEmpty = selectedDevNotes.length === 0;
+  const { isSelectedDevNotesEmpty } = useDisplayDevNotesStore();
 
   return (
     <div className="container min-h-screen h-full">

@@ -30,7 +30,7 @@ type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
 };
 
-type CreateNoteInputs = Pick<DevNotes, "title" | "category" | "content">;
+type CreateNoteInputs = Pick<DevNotes, "title" | "category">;
 
 const CreateUpdateNoteSchema = z.object({
   title: z.string({
@@ -39,13 +39,14 @@ const CreateUpdateNoteSchema = z.object({
   category: z.string({
     required_error: "Category is required.",
   }),
-  content: z.string(),
 });
 
 const CreateUpdateNoteModal = ({
   buttonTrigger,
 }: CreateUpdateNoteModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [content, setContent] = useState("");
+
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
   });
@@ -115,16 +116,25 @@ const CreateUpdateNoteModal = ({
           <div className="space-y-2">
             <FormLabel>Code Snippet</FormLabel>
             <AceEditor
+              onChange={setContent}
               mode="javascript"
               theme="solarized_dark"
+              value={content}
               name="content"
               fontSize={14}
               lineHeight={19}
               showPrintMargin={false}
               showGutter={false}
               highlightActiveLine={false}
-              width="29rem"
+              width="100%"
+              height="300px"
               style={{ borderRadius: ".3rem" }}
+              setOptions={{
+                enableBasicAutocompletion: false,
+                enableLiveAutocompletion: false,
+                enableSnippets: false,
+                showLineNumbers: false,
+              }}
             />
           </div>
           <Button type="submit">Submit</Button>
