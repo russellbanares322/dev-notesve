@@ -6,10 +6,19 @@ import {
   SelectedDevNoteTab,
 } from "@/components";
 import { FilePlus2 } from "lucide-react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
-  const { isSelectedDevNotesEmpty } = useDisplayDevNotesStore();
+  const { selectedDevNotes } = useDisplayDevNotesStore();
+  const isSelectedDevNotesEmpty = selectedDevNotes?.length === 0;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isSelectedDevNotesEmpty) {
+      navigate("/");
+    }
+  }, [isSelectedDevNotesEmpty]);
 
   return (
     <div className="container min-h-screen h-full">

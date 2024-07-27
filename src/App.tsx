@@ -3,26 +3,21 @@ import { ContentWrapper, ModeToggle, SignInButton } from "./components";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "./routes/routes";
 import { useCreateUser } from "./services/user/mutations";
-import { useCheckIfUserExistInDb } from "./services/user/queries";
 import { useEffect } from "react";
 
 function App() {
   const { isSignedIn, user } = useUser();
-  const { data: response } = useCheckIfUserExistInDb(user?.id);
-  const { mutate: createUserMutation } = useCreateUser();
-  const doesUserExist = response?.data;
+  const { mutate: createUserMutation } = useCreateUser(user?.id as string);
 
   useEffect(() => {
     if (isSignedIn) {
-      if (!doesUserExist) {
-        createUserMutation({
-          user_id: user?.id,
-          first_name: user?.firstName as string,
-          last_name: user?.lastName as string,
-        });
-      }
+      createUserMutation({
+        user_id: user?.id,
+        first_name: user?.firstName as string,
+        last_name: user?.lastName as string,
+      });
     }
-  }, [doesUserExist, isSignedIn]);
+  }, []);
 
   const renderRoutes = () => {
     return routes.map((route) => (

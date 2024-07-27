@@ -1,9 +1,17 @@
 import { useMutation } from "@tanstack/react-query"
 import { createUser } from "./user"
 import { CreateUserBody } from "./types"
+import { useCheckIfUserExistInDb } from "./queries";
 
-export const useCreateUser = () => {
+export const useCreateUser = (userId: string) => {
+    const { data: response } = useCheckIfUserExistInDb(userId);
+    const doesUserExist = response?.data;
+
         return useMutation({
-            mutationFn: (createUserBody: CreateUserBody) => createUser(createUserBody),
+            mutationFn: async (createUserBody: CreateUserBody) => {
+                if(!doesUserExist){
+                   return await createUser(createUserBody)
+                }
+            },
         })
 }
