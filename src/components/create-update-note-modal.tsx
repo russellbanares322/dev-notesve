@@ -52,7 +52,7 @@ const CreateUpdateNoteModal = ({
   });
 
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
-    console.log(data);
+    alert(data);
   };
 
   return (
