@@ -52,7 +52,7 @@ const CreateUpdateNoteModal = ({
   });
 
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
-    alert(data);
+    console.log(data);
   };
 
   return (
@@ -125,7 +125,7 @@ const CreateUpdateNoteModal = ({
               lineHeight={19}
               showPrintMargin={false}
               showGutter={false}
-              highlightActiveLine={false}
+              highlightActiveLine={true}
               width="100%"
               height="300px"
               style={{ borderRadius: ".3rem" }}
