@@ -25,6 +25,7 @@ import {
 import AceEditor from "react-ace";
 import "ace-builds/src-noconflict/theme-solarized_dark";
 import "ace-builds/src-noconflict/mode-javascript";
+import { useUser } from "@clerk/clerk-react";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -45,6 +46,7 @@ const CreateUpdateNoteModal = ({
   buttonTrigger,
 }: CreateUpdateNoteModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user } = useUser();
   const [content, setContent] = useState("");
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
@@ -52,7 +54,13 @@ const CreateUpdateNoteModal = ({
   });
 
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
-    console.log(data);
+    const body = {
+      title: data?.title,
+      category: data?.category,
+      content: content,
+      author_id: user?.id,
+    };
+    console.log(body);
   };
 
   return (
