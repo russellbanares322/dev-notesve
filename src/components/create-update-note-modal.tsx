@@ -45,7 +45,7 @@ const CreateUpdateNoteModal = ({
 }: CreateUpdateNoteModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useUser();
-  const [content, _] = useState("");
+  const [content, setContent] = useState("");
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
@@ -59,6 +59,10 @@ const CreateUpdateNoteModal = ({
       author_id: user?.id,
     };
     console.log(body);
+  };
+
+  const onContentChange = (value: string | undefined) => {
+    setContent(value as string);
   };
 
   return (
@@ -124,7 +128,12 @@ const CreateUpdateNoteModal = ({
             <Editor
               height="40vh"
               defaultLanguage="javascript"
+              theme="vs-dark"
               value={content}
+              options={{
+                lineNumbers: "off",
+              }}
+              onChange={onContentChange}
             />
           </div>
           <Button type="submit">Submit</Button>
