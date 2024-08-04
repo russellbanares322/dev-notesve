@@ -4,7 +4,13 @@ import { getDevNote, getDevNoteCategories, getDevNotesByAuthorId } from "./devno
 export const useGetDevNotesByAuthorId = (author_id: string) => {
     return useQuery({
         queryFn: () => getDevNotesByAuthorId(author_id),
-        queryKey: ["Devnotes", author_id]
+        queryKey: ["Devnotes", author_id],
+        select: (data) => {
+            return data.map((note) => ({
+                ...note,
+                category: note.category.toUpperCase()
+            }))
+        }
     })
 }
 
