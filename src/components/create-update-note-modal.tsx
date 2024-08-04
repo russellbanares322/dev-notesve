@@ -22,9 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/theme-solarized_dark";
-import "ace-builds/src-noconflict/mode-javascript";
+import Editor from "@monaco-editor/react";
 import { useUser } from "@clerk/clerk-react";
 
 type CreateUpdateNoteModalProps = {
@@ -47,7 +45,7 @@ const CreateUpdateNoteModal = ({
 }: CreateUpdateNoteModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useUser();
-  const [content, setContent] = useState("");
+  const [content, _] = useState("");
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
@@ -111,8 +109,8 @@ const CreateUpdateNoteModal = ({
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="apple">Apple</SelectItem>
-                      <SelectItem value="banana">Banana</SelectItem>
+                      <SelectItem value="apple">Javascript</SelectItem>
+                      <SelectItem value="banana">C#</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -123,26 +121,10 @@ const CreateUpdateNoteModal = ({
           {/* Code Snippet */}
           <div className="space-y-2">
             <FormLabel>Code Snippet</FormLabel>
-            <AceEditor
-              onChange={setContent}
-              mode="javascript"
-              theme="solarized_dark"
+            <Editor
+              height="40vh"
+              defaultLanguage="javascript"
               value={content}
-              name="content"
-              fontSize={14}
-              lineHeight={19}
-              showPrintMargin={false}
-              showGutter={false}
-              highlightActiveLine={true}
-              width="100%"
-              height="300px"
-              style={{ borderRadius: ".3rem" }}
-              setOptions={{
-                enableBasicAutocompletion: false,
-                enableLiveAutocompletion: false,
-                enableSnippets: false,
-                showLineNumbers: false,
-              }}
             />
           </div>
           <Button type="submit">Submit</Button>

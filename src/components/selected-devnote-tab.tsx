@@ -32,7 +32,7 @@ const SelectedDevNoteTab = () => {
             key={note.devnote_id}
             onClick={() => handleViewDevNote(note.devnote_id)}
           >
-            <p className="text-sm">{note.title}</p>
+            <p className="md:text-sm text-xs">{note.title}</p>
             <X
               size={17}
               className="absolute -right-[20px]"
