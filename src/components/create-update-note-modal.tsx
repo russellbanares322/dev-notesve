@@ -133,6 +133,7 @@ const CreateUpdateNoteModal = ({
               options={{
                 lineNumbers: "off",
               }}
+              className="rounded-md"
               onChange={onContentChange}
             />
           </div>
