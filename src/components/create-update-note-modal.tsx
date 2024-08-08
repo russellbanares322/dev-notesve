@@ -24,6 +24,7 @@ import {
 } from "./ui/select";
 import Editor from "@monaco-editor/react";
 import { useUser } from "@clerk/clerk-react";
+import { useCreateDevNote } from "@/services/devnote/mutations";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -47,6 +48,13 @@ const CreateUpdateNoteModal = ({
   const { user } = useUser();
   const [content, setContent] = useState("");
 
+  const onClearFormInputs = () => {
+    form.reset();
+    setContent("");
+    setIsModalOpen(false);
+  };
+  const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
+
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
   });
@@ -56,9 +64,10 @@ const CreateUpdateNoteModal = ({
       title: data?.title,
       category: data?.category,
       content: content,
-      author_id: user?.id,
+      author_id: user?.id as string,
     };
-    console.log(body);
+
+    createDevNoteMutation(body);
   };
 
   const onContentChange = (value: string | undefined) => {
