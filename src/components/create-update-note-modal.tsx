@@ -25,6 +25,7 @@ import {
 import Editor from "@monaco-editor/react";
 import { useUser } from "@clerk/clerk-react";
 import { useCreateDevNote } from "@/services/devnote/mutations";
+import { useGetDevNoteCategories } from "@/services/devnote/queries";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -54,6 +55,7 @@ const CreateUpdateNoteModal = ({
     setIsModalOpen(false);
   };
   const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
+  const { data: categoriesData } = useGetDevNoteCategories(user?.id as string);
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
@@ -122,8 +124,12 @@ const CreateUpdateNoteModal = ({
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="apple">Javascript</SelectItem>
-                      <SelectItem value="banana">C#</SelectItem>
+                      {categoriesData?.map((category: string) => (
+                        <SelectItem value={category}>{category}</SelectItem>
+                      ))}
+                      <SelectItem value="Others">
+                        Add Custom Category
+                      </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
