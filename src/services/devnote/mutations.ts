@@ -11,8 +11,7 @@ export const useCreateDevNote = (onClearFormInputs: () => void) => {
         mutationFn: (postParams: CreateDevNoteParams) => createDevNote(postParams),
         onSuccess: (response) => {
             toast({
-                title: "Success",
-                description: response
+                description: response?.successMessage
             })
             onClearFormInputs();
             queryClient.invalidateQueries({ queryKey: ["Devnotes"] })

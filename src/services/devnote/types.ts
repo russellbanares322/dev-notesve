@@ -1,3 +1,5 @@
+import { ApiResponse } from "@/types/types"
+
 export type DevNotes = {
     devnote_id : number
     title: string
@@ -14,4 +16,5 @@ export type CreateDevNoteParams = {
     author_id: string
 }
 
+export type CreateDevNoteResponse = ApiResponse<CreateDevNoteParams>
 export type DevNotesCategories = string[]
