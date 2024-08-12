@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { z } from "zod";
+import { custom, z } from "zod";
 import Dialog from "./dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +27,9 @@ import { useUser } from "@clerk/clerk-react";
 import { useCreateDevNote } from "@/services/devnote/mutations";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
 import { CircleX } from "lucide-react";
+import { TooltipTrigger } from "@radix-ui/react-tooltip";
+import { Tooltip, TooltipContent } from "./ui/tooltip";
+import { Label } from "./ui/label";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -43,16 +46,23 @@ const CreateUpdateNoteSchema = z.object({
   }),
 });
 
+const CUSTOM_FORM_INPUTS_DATA = {
+  noteContent: "",
+  customCategory: "",
+};
+
 const CreateUpdateNoteModal = ({
   buttonTrigger,
 }: CreateUpdateNoteModalProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useUser();
-  const [content, setContent] = useState("");
+  const [customFormInputs, setCustomFormInputs] = useState(
+    CUSTOM_FORM_INPUTS_DATA
+  );
 
   const onClearFormInputs = () => {
     form.reset();
-    setContent("");
+    setCustomFormInputs(CUSTOM_FORM_INPUTS_DATA);
     setIsModalOpen(false);
   };
   const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
@@ -68,15 +78,21 @@ const CreateUpdateNoteModal = ({
     const body = {
       title: data?.title,
       category: data?.category,
-      content: content,
+      content: customFormInputs?.noteContent,
       author_id: user?.id as string,
     };
 
     createDevNoteMutation(body);
   };
 
-  const onContentChange = (value: string | undefined) => {
-    setContent(value as string);
+  const onCustomFormInputsValueChange = (
+    value: string | undefined,
+    id: "noteContent" | "customCategory"
+  ) => {
+    setCustomFormInputs({
+      ...customFormInputs,
+      [id]: value,
+    });
   };
 
   return (
@@ -109,6 +125,7 @@ const CreateUpdateNoteModal = ({
               </FormItem>
             )}
           />
+
           {/* Category */}
           {!isSelectedCategoryOthers && (
             <FormField
@@ -143,27 +160,43 @@ const CreateUpdateNoteModal = ({
             />
           )}
           {isSelectedCategoryOthers && (
-            <div>
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Please input the category of your note..."
-                        onChange={field.onChange}
-                        value={field.value}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button>
-                <CircleX />
-              </Button>
+            <div className="flex items-center gap-1 w-full">
+              <div className="grid w-full max-w-sm items-center gap-2 mt-1">
+                <Label htmlFor="customCategory">Category</Label>
+                <Input
+                  onChange={(e) =>
+                    onCustomFormInputsValueChange(
+                      e.target.value,
+                      "customCategory"
+                    )
+                  }
+                  value={customFormInputs.customCategory}
+                  type="text"
+                  id="customCategory"
+                  placeholder="Please input category..."
+                />
+              </div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={() => {
+                      form.resetField("category");
+                      setCustomFormInputs({
+                        ...customFormInputs,
+                        customCategory: "",
+                      });
+                    }}
+                    type="button"
+                    className="mt-6"
+                    variant="outline"
+                  >
+                    <CircleX />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Discard Changes</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           )}
           {/* Code Snippet */}
@@ -173,12 +206,14 @@ const CreateUpdateNoteModal = ({
               height="40vh"
               defaultLanguage="javascript"
               theme="vs-dark"
-              value={content}
+              value={customFormInputs.noteContent}
               options={{
                 lineNumbers: "off",
               }}
               className="rounded-md"
-              onChange={onContentChange}
+              onChange={(value) =>
+                onCustomFormInputsValueChange(value, "noteContent")
+              }
             />
           </div>
           <Button type="submit">Submit</Button>
