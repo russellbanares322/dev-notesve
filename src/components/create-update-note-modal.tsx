@@ -26,6 +26,7 @@ import Editor from "@monaco-editor/react";
 import { useUser } from "@clerk/clerk-react";
 import { useCreateDevNote } from "@/services/devnote/mutations";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
+import { CircleX } from "lucide-react";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
@@ -60,6 +61,8 @@ const CreateUpdateNoteModal = ({
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
   });
+  const selectedCategoryValue = form.watch("category");
+  const isSelectedCategoryOthers = selectedCategoryValue === "Others";
 
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
     const body = {
@@ -107,36 +110,62 @@ const CreateUpdateNoteModal = ({
             )}
           />
           {/* Category */}
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Category</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Please select the category of your note..." />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectGroup>
-                      {categoriesData?.map((category: string) => (
-                        <SelectItem value={category}>{category}</SelectItem>
-                      ))}
-                      <SelectItem value="Others">
-                        Add Custom Category
-                      </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {!isSelectedCategoryOthers && (
+            <FormField
+              control={form.control}
+              name="category"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Please select the category of your note..." />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectGroup>
+                        {categoriesData?.map((category: string) => (
+                          <SelectItem value={category}>{category}</SelectItem>
+                        ))}
+                        <SelectItem value="Others">
+                          Add Custom Category
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
+          {isSelectedCategoryOthers && (
+            <div>
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Category</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Please input the category of your note..."
+                        onChange={field.onChange}
+                        value={field.value}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button>
+                <CircleX />
+              </Button>
+            </div>
+          )}
           {/* Code Snippet */}
           <div className="space-y-2">
             <FormLabel>Code Snippet</FormLabel>

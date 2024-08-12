@@ -70,22 +70,20 @@ const Sidebar = () => {
             )}
             <p className="text-sm font-semibold">DEV-NOTESVE</p>
           </div>
-          <TooltipProvider>
-            <Tooltip>
-              <CreateUpdateNoteModal
-                buttonTrigger={
-                  <TooltipTrigger asChild>
-                    <Button variant="ghost" size="sm">
-                      <FilePlus2 size={15} />
-                    </Button>
-                  </TooltipTrigger>
-                }
-              />
-              <TooltipContent>
-                <p>Create new note</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+          <Tooltip>
+            <CreateUpdateNoteModal
+              buttonTrigger={
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="sm">
+                    <FilePlus2 size={15} />
+                  </Button>
+                </TooltipTrigger>
+              }
+            />
+            <TooltipContent>
+              <p>Create new note</p>
+            </TooltipContent>
+          </Tooltip>
         </div>
         <ul
           className={twMerge(
