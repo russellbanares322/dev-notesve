@@ -33,7 +33,7 @@ const DevNoteDetails = () => {
           </span>
         </span>
       </div>
-      <div>
+      <div className="mt-10">
         <SyntaxHighlighter
           customStyle={{
             borderRadius: "1rem",
