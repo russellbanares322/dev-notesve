@@ -7,12 +7,7 @@ import { useState } from "react";
 import { useTheme } from "@/context/theme-provider";
 import DevNotesFileDisplay from "../devnote-files-display";
 import { Button } from "../ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import CreateUpdateNoteModal from "../create-update-note-modal";
 
 const Sidebar = () => {
