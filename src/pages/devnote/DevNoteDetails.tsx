@@ -4,6 +4,8 @@ import moment from "moment";
 import { Dot, FilePenLine } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const DevNoteDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -32,7 +34,16 @@ const DevNoteDetails = () => {
         </span>
       </div>
       <div>
-        <p>{data?.content}</p>
+        <SyntaxHighlighter
+          customStyle={{
+            borderRadius: "1rem",
+            fontWeight: "bold",
+          }}
+          language="javascript"
+          style={coldarkCold}
+        >
+          {`${data?.content}`}
+        </SyntaxHighlighter>
       </div>
     </div>
   );
