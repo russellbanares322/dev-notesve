@@ -14,6 +14,11 @@ export const routes: Routes[] = [
     element: <Home />,
     child: [
       {
+        path: "devnote",
+        name: "DevNote",
+        element: <DevNoteDetails />,
+      },
+      {
         path: "devnote/:id",
         name: "DevNote Details",
         element: <DevNoteDetails />,
