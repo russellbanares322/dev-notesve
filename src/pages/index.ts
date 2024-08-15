@@ -1,4 +1,5 @@
+import DevNoteCard from "./devnote/DevNoteCard";
 import DevNoteDetails from "./devnote/DevNoteDetails";
 import Home from "./home/Home";
 
-export { DevNoteDetails, Home }
+export {DevNoteCard,  DevNoteDetails, Home }
