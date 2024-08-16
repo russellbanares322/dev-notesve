@@ -1,3 +1,4 @@
+// Instantiate devnote cards
 const DevNoteCard = () => {
   return <div>DevNoteCard</div>;
 };
