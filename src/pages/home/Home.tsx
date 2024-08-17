@@ -26,7 +26,7 @@ const Home = () => {
         </div>
       )}
       {/* Devnote Card */}
-      <div className="flex items-center justify-center gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
         {data?.map((item) => (
           <DevNoteCard {...item} />
         ))}

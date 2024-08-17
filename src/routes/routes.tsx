@@ -1,4 +1,4 @@
-import { DevNoteDetails, Home } from "@/pages";
+import { Home } from "@/pages";
 
 type Routes = {
   path: string;
@@ -12,17 +12,5 @@ export const routes: Routes[] = [
     path: "/",
     name: "Home",
     element: <Home />,
-    child: [
-      {
-        path: "devnote",
-        name: "DevNote",
-        element: <DevNoteDetails />,
-      },
-      {
-        path: "devnote/:id",
-        name: "DevNote Details",
-        element: <DevNoteDetails />,
-      },
-    ],
   },
 ];
