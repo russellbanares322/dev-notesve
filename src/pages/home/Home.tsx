@@ -4,6 +4,7 @@ import { useUser } from "@clerk/clerk-react";
 import { FilePlus2 } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import DevNoteCard from "../devnote/DevNoteCard";
+import DevNoteFilterOptions from "../devnote/DevNoteFilterOptions";
 
 const Home = () => {
   const { user } = useUser();
@@ -25,11 +26,15 @@ const Home = () => {
           />
         </div>
       )}
-      {/* Devnote Card */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-        {data?.map((item) => (
-          <DevNoteCard {...item} />
-        ))}
+      <div className="mt-10 space-y-5">
+        {/* Devnote Filter Options */}
+        <DevNoteFilterOptions />
+        {/* Devnote Card */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+          {data?.map((item) => (
+            <DevNoteCard {...item} />
+          ))}
+        </div>
       </div>
       <Outlet />
     </div>
