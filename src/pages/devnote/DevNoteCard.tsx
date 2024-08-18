@@ -1,4 +1,11 @@
 import { Button } from "@/components";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
 import { DevNotes } from "@/services/devnote/types";
 import { Ellipsis } from "lucide-react";
@@ -13,9 +20,21 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     <div className="border rounded-tl-md rounded-tr-md">
       <div className="flex items-center justify-between">
         <p className="font-semibold p-2">{truncateString(title)}</p>
-        <Button variant="ghost" size="sm">
-          <Ellipsis />
-        </Button>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm">
+              <Ellipsis />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {dedvNoteCardActions.map((action) => (
+              <DropdownMenuItem key={action.key}>
+                {action.icon}
+                {action.title}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <SyntaxHighlighter
         customStyle={{

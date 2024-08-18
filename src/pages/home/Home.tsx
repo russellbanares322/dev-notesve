@@ -26,16 +26,28 @@ const Home = () => {
           />
         </div>
       )}
-      <div className="mt-10 space-y-5">
-        {/* Devnote Filter Options */}
-        <DevNoteFilterOptions />
-        {/* Devnote Card */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-          {data?.map((item) => (
-            <DevNoteCard {...item} />
-          ))}
+      {!isDataEmpty && (
+        <div className="mt-10 space-y-5">
+          <div className="flex items-center justify-between">
+            {/* Devnote Filter Options */}
+            <DevNoteFilterOptions />
+            {/* Add Devnote Button */}
+            <CreateUpdateNoteModal
+              buttonTrigger={
+                <Button>
+                  Create new note <FilePlus2 className="ml-1" />
+                </Button>
+              }
+            />
+          </div>
+          {/* Devnote Card */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
+            {data?.map((item) => (
+              <DevNoteCard {...item} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
       <Outlet />
     </div>
   );
