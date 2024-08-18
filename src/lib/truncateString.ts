@@ -1,4 +1,4 @@
-const MAX_TEXT_LENGTH = 20
+const MAX_TEXT_LENGTH = 25
 
 /**
  * 
