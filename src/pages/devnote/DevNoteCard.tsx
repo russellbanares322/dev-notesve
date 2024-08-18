@@ -16,6 +16,13 @@ type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { title, content } = props;
 
+  const onDropdownMenuActionClick = (key: string) => {
+    if (key === "Delete") {
+      return console.log("Delete");
+    }
+    return console.log("Edit");
+  };
+
   return (
     <div className="border rounded-tl-md rounded-tr-md">
       <div className="flex items-center justify-between">
@@ -28,7 +35,10 @@ const DevNoteCard = (props: DevNoteCardProps) => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             {dedvNoteCardActions.map((action) => (
-              <DropdownMenuItem key={action.key}>
+              <DropdownMenuItem
+                onClick={() => onDropdownMenuActionClick(action.key)}
+                key={action.key}
+              >
                 {action.icon}
                 {action.title}
               </DropdownMenuItem>
