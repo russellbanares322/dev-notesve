@@ -20,13 +20,21 @@ import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
 import { Ellipsis } from "lucide-react";
+import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { devnote_id, title, content } = props;
-  const { mutate: deleteDevNoteMutation } = useDeleteDevNote();
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
+  const onCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+
+  const { mutate: deleteDevNoteMutation } =
+    useDeleteDevNote(onCloseDeleteDialog);
   const onDropdownMenuActionClick = (key: string) => {
     return console.log(key);
   };
@@ -35,7 +43,10 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     <div className="border rounded-tl-md rounded-tr-md">
       <div className="flex items-center justify-between">
         <p className="font-semibold p-2">{truncateString(title)}</p>
-        <ShadCnDialog>
+        <ShadCnDialog
+          open={openDeleteDialog}
+          onOpenChange={setOpenDeleteDialog}
+        >
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">

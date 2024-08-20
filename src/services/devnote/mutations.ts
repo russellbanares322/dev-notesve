@@ -19,17 +19,18 @@ export const useCreateDevNote = (onClearFormInputs: () => void) => {
     })
 }
 
-export const useDeleteDevNote = () => {
+export const useDeleteDevNote = (closeDialog: () => void) => {
     const { toast } = useToast();
     const queryClient = useQueryClient();
     
     return useMutation({
-        mutationFn: (devnote_id: string) => deleteDevNote(devnote_id),
+        mutationFn: (devnote_id: number) => deleteDevNote(devnote_id),
         onSuccess: (response) => {
             toast({
                 description: response
             });
             queryClient.invalidateQueries({ queryKey: ["Devnotes"] })
+            closeDialog()
         }
     })
 }

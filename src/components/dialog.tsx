@@ -9,7 +9,7 @@ import {
 } from "./ui/shadcn-dialog";
 
 type DialogProps = {
-  buttonTrigger: React.ReactNode;
+  buttonTrigger?: React.ReactNode;
   children: React.ReactNode;
   open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
