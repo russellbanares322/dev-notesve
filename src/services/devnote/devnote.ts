@@ -40,7 +40,7 @@ export const createDevNote = async (postParams: CreateDevNoteParams): Promise<Cr
     return response.data;
 }
 
-export const deleteDevNote = async (devnote_id: string) => {
+export const deleteDevNote = async (devnote_id: number) => {
     const response = await api.delete(`${DEV_NOTES}/${devnote_id}`);
 
     return response.data

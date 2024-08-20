@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/shadcn-dialog";
 import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
+import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
 import { Ellipsis } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -24,8 +25,8 @@ import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
-  const { title, content } = props;
-
+  const { devnote_id, title, content } = props;
+  const { mutate: deleteDevNoteMutation } = useDeleteDevNote();
   const onDropdownMenuActionClick = (key: string) => {
     return console.log(key);
   };
@@ -75,7 +76,9 @@ const DevNoteCard = (props: DevNoteCardProps) => {
               <ShadCnDialogClose asChild>
                 <Button variant="outline">Cancel</Button>
               </ShadCnDialogClose>
-              <Button>Delete</Button>
+              <Button onClick={() => deleteDevNoteMutation(devnote_id)}>
+                Delete
+              </Button>
             </ShadCnDialogFooter>
           </ShadCnDialogContent>
         </ShadCnDialog>
