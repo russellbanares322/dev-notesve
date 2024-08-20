@@ -1,23 +1,30 @@
 import { Button } from "@/components";
-import Dialog from "@/components/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  ShadCnDialog,
+  ShadCnDialogClose,
+  ShadCnDialogContent,
+  ShadCnDialogDescription,
+  ShadCnDialogFooter,
+  ShadCnDialogHeader,
+  ShadCnDialogTitle,
+  ShadCnDialogTrigger,
+} from "@/components/ui/shadcn-dialog";
 import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
 import { DevNotes } from "@/services/devnote/types";
 import { Ellipsis } from "lucide-react";
-import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { title, content } = props;
-  const [onOpenDeleteDialog, setOnOpenDeleteDialog] = useState(false);
 
   const onDropdownMenuActionClick = (key: string) => {
     return console.log(key);
@@ -27,41 +34,51 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     <div className="border rounded-tl-md rounded-tr-md">
       <div className="flex items-center justify-between">
         <p className="font-semibold p-2">{truncateString(title)}</p>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="sm">
-              <Ellipsis />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {dedvNoteCardActions.map((action) => {
-              const isActionForDelete = action.key === "Delete";
-              return isActionForDelete ? (
-                <Dialog
-                  buttonTrigger={
+        <ShadCnDialog>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <Ellipsis />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              {dedvNoteCardActions.map((action) => {
+                const isActionForDelete = action.key === "Delete";
+                return isActionForDelete ? (
+                  <ShadCnDialogTrigger>
                     <DropdownMenuItem key={action.key}>
                       {action.icon}
                       {action.title}
                     </DropdownMenuItem>
-                  }
-                  onOpenChange={setOnOpenDeleteDialog}
-                  open={onOpenDeleteDialog}
-                  title="Are you sure to delete this data?"
-                >
-                  <h1>Hi</h1>
-                </Dialog>
-              ) : (
-                <DropdownMenuItem
-                  onClick={() => onDropdownMenuActionClick(action.key)}
-                  key={action.key}
-                >
-                  {action.icon}
-                  {action.title}
-                </DropdownMenuItem>
-              );
-            })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+                  </ShadCnDialogTrigger>
+                ) : (
+                  <DropdownMenuItem
+                    onClick={() => onDropdownMenuActionClick(action.key)}
+                    key={action.key}
+                  >
+                    {action.icon}
+                    {action.title}
+                  </DropdownMenuItem>
+                );
+              })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <ShadCnDialogContent>
+            <ShadCnDialogHeader>
+              <ShadCnDialogTitle>Are you sure?</ShadCnDialogTitle>
+              <ShadCnDialogDescription>
+                Do you want to delete the entry? Deleting this entry cannot be
+                undone.
+              </ShadCnDialogDescription>
+            </ShadCnDialogHeader>
+            <ShadCnDialogFooter>
+              <ShadCnDialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </ShadCnDialogClose>
+              <Button>Delete</Button>
+            </ShadCnDialogFooter>
+          </ShadCnDialogContent>
+        </ShadCnDialog>
       </div>
       <SyntaxHighlighter
         customStyle={{
