@@ -35,6 +35,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
 
   const { mutate: deleteDevNoteMutation } =
     useDeleteDevNote(onCloseDeleteDialog);
+
   const onDropdownMenuActionClick = (key: string) => {
     return console.log(key);
   };
@@ -57,8 +58,8 @@ const DevNoteCard = (props: DevNoteCardProps) => {
               {dedvNoteCardActions.map((action) => {
                 const isActionForDelete = action.key === "Delete";
                 return isActionForDelete ? (
-                  <ShadCnDialogTrigger>
-                    <DropdownMenuItem key={action.key}>
+                  <ShadCnDialogTrigger key={action.key}>
+                    <DropdownMenuItem>
                       {action.icon}
                       {action.title}
                     </DropdownMenuItem>

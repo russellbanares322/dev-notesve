@@ -146,7 +146,9 @@ const CreateUpdateNoteModal = ({
                     <SelectContent>
                       <SelectGroup>
                         {categoriesData?.map((category: string) => (
-                          <SelectItem value={category}>{category}</SelectItem>
+                          <SelectItem key={category} value={category}>
+                            {category}
+                          </SelectItem>
                         ))}
                         <SelectItem value="Others">
                           Add Custom Category
