@@ -60,6 +60,7 @@ const CreateUpdateNoteModal = ({
     CUSTOM_FORM_INPUTS_DATA
   );
 
+  // Implement auto populate of each field once edit button is clicked
   const onClearFormInputs = () => {
     form.reset();
     setCustomFormInputs(CUSTOM_FORM_INPUTS_DATA);
