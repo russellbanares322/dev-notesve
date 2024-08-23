@@ -1,4 +1,5 @@
 import { Button } from "@/components";
+import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +28,7 @@ import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
-  const { devnote_id, title, content, date_created } = props;
+  const { devnote_id, title, content, date_created, category } = props;
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const onCloseDeleteDialog = () => {
@@ -43,9 +44,10 @@ const DevNoteCard = (props: DevNoteCardProps) => {
 
   return (
     <div className="border rounded-tl-md rounded-tr-md">
-      <div className="flex items-center justify-between">
+      <div className="flex items-start justify-between">
         <div className="p-2">
           <p className="font-semibold">{truncateString(title)}</p>
+          <Badge>{category}</Badge>
           <p className="text-xs">
             Date Created: {moment(date_created).format("LLL")}
           </p>
