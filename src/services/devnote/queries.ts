@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { getDevNote, getDevNoteCategories, getDevNotesByAuthorId } from "./devnote"
+import { useUser } from "@clerk/clerk-react"
 
 export const useGetDevNotesByAuthorId = (author_id: string) => {
     return useQuery({
@@ -22,9 +23,11 @@ export const useGetDevNote = (devnote_id: string) => {
 }
 
 
-export const useGetDevNoteCategories = (author_id: string) => {
+export const useGetDevNoteCategories = () => {
+    const {user} = useUser()
+    
     return useQuery({
-        queryFn: () => getDevNoteCategories(author_id),
+        queryFn: () => getDevNoteCategories(user?.id as string),
         queryKey: ["Devnotes"],
         select: (data) => {
             const filteredData = [...new Set(data.map((category: string) => category.toUpperCase()))]
