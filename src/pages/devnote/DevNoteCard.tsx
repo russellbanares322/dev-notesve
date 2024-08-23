@@ -20,13 +20,14 @@ import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
 import { Ellipsis } from "lucide-react";
+import moment from "moment";
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
-  const { devnote_id, title, content } = props;
+  const { devnote_id, title, content, date_created } = props;
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const onCloseDeleteDialog = () => {
@@ -43,7 +44,12 @@ const DevNoteCard = (props: DevNoteCardProps) => {
   return (
     <div className="border rounded-tl-md rounded-tr-md">
       <div className="flex items-center justify-between">
-        <p className="font-semibold p-2">{truncateString(title)}</p>
+        <div className="p-2">
+          <p className="font-semibold">{truncateString(title)}</p>
+          <p className="text-xs">
+            Date Created: {moment(date_created).format("LLL")}
+          </p>
+        </div>
         <ShadCnDialog
           open={openDeleteDialog}
           onOpenChange={setOpenDeleteDialog}
