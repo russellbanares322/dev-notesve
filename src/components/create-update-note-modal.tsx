@@ -78,7 +78,10 @@ const CreateUpdateNoteModal = ({
   const onSubmit: SubmitHandler<CreateNoteInputs> = (data) => {
     const body = {
       title: data?.title,
-      category: data?.category,
+      category:
+        data?.category === "Others"
+          ? customFormInputs.customCategory
+          : data?.category,
       content: customFormInputs?.noteContent,
       author_id: user?.id as string,
     };
