@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query"
 import { getDevNote, getDevNoteCategories, getDevNotesByAuthorId } from "./devnote"
 import { useUser } from "@clerk/clerk-react"
+import { GetDevNotesByAuthorIdParams } from "./types"
 
-export const useGetDevNotesByAuthorId = (author_id: string) => {
+export const useGetDevNotesByAuthorId = (params: GetDevNotesByAuthorIdParams) => {
     return useQuery({
-        queryFn: () => getDevNotesByAuthorId(author_id),
-        queryKey: ["Devnotes", author_id],
+        queryFn: () => getDevNotesByAuthorId({
+            author_id: params.author_id,
+            sort_direction: params.sort_direction
+        }),
+        queryKey: ["Devnotes", params],
         select: (data) => {
             return data.map((note) => ({
                 ...note,

@@ -7,12 +7,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { SortDirectionValue } from "@/services/devnote/types";
 
-const SortFilter = () => {
+type SortFilterProps = {
+  onSelectSortDirection: (value: SortDirectionValue) => void;
+  currentSelectedSortDirection: SortDirectionValue;
+};
+
+const SortFilter = ({
+  onSelectSortDirection,
+  currentSelectedSortDirection,
+}: SortFilterProps) => {
   return (
     <div>
       <Label>Sort Direction</Label>
-      <Select value="1">
+      <Select
+        value={currentSelectedSortDirection}
+        onValueChange={(value) =>
+          onSelectSortDirection(value as SortDirectionValue)
+        }
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue />
         </SelectTrigger>

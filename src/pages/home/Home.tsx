@@ -5,11 +5,22 @@ import { FilePlus2 } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import DevNoteCard from "../devnote/DevNoteCard";
 import DevNoteFilterOptions from "../devnote/DevNoteFilterOptions";
+import { useState } from "react";
+import { SortDirectionValue } from "@/services/devnote/types";
 
 const Home = () => {
   const { user } = useUser();
-  const { data } = useGetDevNotesByAuthorId(user?.id as string);
+  const [sortDirection, setSortDirection] = useState<SortDirectionValue>("1");
+
+  const { data } = useGetDevNotesByAuthorId({
+    author_id: user?.id as string,
+    sort_direction: sortDirection,
+  });
   const isDataEmpty = data?.length === 0;
+
+  const onSelectSortDirection = (value: SortDirectionValue) => {
+    setSortDirection(value);
+  };
 
   return (
     <div className="container min-h-screen h-full">
@@ -30,7 +41,10 @@ const Home = () => {
         <div className="mt-10 space-y-5">
           <div className="flex items-center justify-between">
             {/* Devnote Filter Options */}
-            <DevNoteFilterOptions />
+            <DevNoteFilterOptions
+              onSelectSortDirection={onSelectSortDirection}
+              currentSelectedSortDirection={sortDirection}
+            />
             {/* Add Devnote Button */}
             <CreateUpdateNoteModal
               buttonTrigger={
