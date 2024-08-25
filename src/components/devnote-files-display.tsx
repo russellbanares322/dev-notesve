@@ -12,7 +12,10 @@ type DevNotesFileDisplayProps = {
 
 const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
   const { user } = useUser();
-  const { data } = useGetDevNotesByAuthorId(user?.id as string);
+  const { data } = useGetDevNotesByAuthorId({
+    author_id: user?.id as string,
+    sort_direction: "0",
+  });
   const filteredDevNotes = data?.filter((note) => note.category === category);
   const { onSelectDevNote } = useDisplayDevNotesStore();
   const navigate = useNavigate();
