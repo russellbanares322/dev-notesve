@@ -9,15 +9,18 @@ import {
 } from "@/components/ui/select";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
 
-const CategoryFilter = () => {
+type CategoryFilterProps = {
+  onSelectCategory: (value: string) => void;
+};
+const CategoryFilter = ({ onSelectCategory }: CategoryFilterProps) => {
   const { data: categoriesData } = useGetDevNoteCategories();
 
   return (
     <div>
       <Label>Filter by category</Label>
-      <Select>
+      <Select onValueChange={onSelectCategory}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select a category" />
+          <SelectValue />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>

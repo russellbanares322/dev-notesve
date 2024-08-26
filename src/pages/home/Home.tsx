@@ -11,15 +11,21 @@ import { SortDirectionValue } from "@/services/devnote/types";
 const Home = () => {
   const { user } = useUser();
   const [sortDirection, setSortDirection] = useState<SortDirectionValue>("1");
+  const [category, setCategory] = useState("");
 
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
     sort_direction: sortDirection,
+    category: category,
   });
   const isDataEmpty = data?.length === 0;
 
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
+  };
+
+  const onSelectCategory = (value: string) => {
+    setCategory(value);
   };
 
   return (
@@ -44,6 +50,7 @@ const Home = () => {
             <DevNoteFilterOptions
               onSelectSortDirection={onSelectSortDirection}
               currentSelectedSortDirection={sortDirection}
+              onSelectCategory={onSelectCategory}
             />
             {/* Add Devnote Button */}
             <CreateUpdateNoteModal

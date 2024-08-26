@@ -14,6 +14,7 @@ export type SortDirectionValue = "0" | "1"
 export type GetDevNotesByAuthorIdParams = {
     author_id: string,
     sort_direction: SortDirectionValue
+    category: string
 }
 
 export type CreateDevNoteParams = {

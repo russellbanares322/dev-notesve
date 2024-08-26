@@ -15,6 +15,7 @@ const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
     sort_direction: "0" as SortDirectionValue,
+    category: "",
   });
   const filteredDevNotes = data?.filter((note) => note.category === category);
   const { onSelectDevNote } = useDisplayDevNotesStore();

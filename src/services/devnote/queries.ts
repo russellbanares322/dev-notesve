@@ -7,7 +7,8 @@ export const useGetDevNotesByAuthorId = (params: GetDevNotesByAuthorIdParams) =>
     return useQuery({
         queryFn: () => getDevNotesByAuthorId({
             author_id: params.author_id,
-            sort_direction: params.sort_direction
+            sort_direction: params.sort_direction,
+            category: params.category
         }),
         queryKey: ["Devnotes", params],
         select: (data) => {
