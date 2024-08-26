@@ -1,6 +1,6 @@
 import { truncateString } from "@/lib/truncateString";
 import { useGetDevNotesByAuthorId } from "@/services/devnote/queries";
-import { DevNotes } from "@/services/devnote/types";
+import { DevNotes, SortDirectionValue } from "@/services/devnote/types";
 import { useDisplayDevNotesStore } from "@/store/useDisplayDevNotesStore";
 import { useUser } from "@clerk/clerk-react";
 import { File } from "lucide-react";
@@ -14,7 +14,7 @@ const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
   const { user } = useUser();
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
-    sort_direction: "0",
+    sort_direction: "0" as SortDirectionValue,
   });
   const filteredDevNotes = data?.filter((note) => note.category === category);
   const { onSelectDevNote } = useDisplayDevNotesStore();
