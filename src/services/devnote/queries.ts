@@ -37,7 +37,7 @@ export const useGetDevNoteCategories = () => {
         select: (data) => {
             const filteredData = [...new Set(data.map((category: string) => category.toUpperCase()))]
 
-            return filteredData as string[]
+            return ["ALL", ...filteredData] as string[]
         }
     })
 }

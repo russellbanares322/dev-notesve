@@ -16,7 +16,7 @@ const Home = () => {
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
     sort_direction: sortDirection,
-    category: category,
+    category: category === "ALL" ? "" : category,
   });
   const isDataEmpty = data?.length === 0;
 
