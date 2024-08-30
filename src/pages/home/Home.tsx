@@ -1,4 +1,9 @@
-import { AppLogo, Button, CreateUpdateNoteModal } from "@/components";
+import {
+  AppLogo,
+  Button,
+  CreateUpdateNoteModal,
+  Pagination,
+} from "@/components";
 import { useGetDevNotesByAuthorId } from "@/services/devnote/queries";
 import { useUser } from "@clerk/clerk-react";
 import { FilePlus2 } from "lucide-react";
@@ -68,6 +73,7 @@ const Home = () => {
               <DevNoteCard {...item} />
             ))}
           </div>
+          <Pagination />
         </div>
       )}
       <Outlet />
