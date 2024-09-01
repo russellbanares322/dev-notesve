@@ -20,7 +20,7 @@ import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
-import { Ellipsis } from "lucide-react";
+import { Copy, Ellipsis } from "lucide-react";
 import moment from "moment";
 import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -103,19 +103,22 @@ const DevNoteCard = (props: DevNoteCardProps) => {
           </ShadCnDialogContent>
         </ShadCnDialog>
       </div>
-      <SyntaxHighlighter
-        customStyle={{
-          borderBottomLeftRadius: "0.5rem",
-          borderBottomRightRadius: "0.5rem",
-          fontWeight: "bold",
-          margin: 0,
-          height: "100%",
-        }}
-        language="javascript"
-        style={coldarkCold}
-      >
-        {`${content}`}
-      </SyntaxHighlighter>
+      <div className="relative group h-full w-full">
+        <SyntaxHighlighter
+          customStyle={{
+            borderBottomLeftRadius: "0.5rem",
+            borderBottomRightRadius: "0.5rem",
+            fontWeight: "bold",
+            margin: 0,
+            height: "100%",
+          }}
+          language="javascript"
+          style={coldarkCold}
+        >
+          {`${content}`}
+        </SyntaxHighlighter>
+        <Copy className="absolute top-2 right-2 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200" />
+      </div>
     </div>
   );
 };
