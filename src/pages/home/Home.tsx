@@ -46,7 +46,7 @@ const Home = () => {
     return () => {
       window.removeEventListener("scroll", onMakeFilterOptionSticky);
     };
-  }, [makeFilterOptionSticky]);
+  }, []);
 
   return (
     <div className="container min-h-screen h-full">
