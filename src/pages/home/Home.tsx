@@ -13,12 +13,14 @@ import DevNoteFilterOptions from "../devnote/DevNoteFilterOptions";
 import { useEffect, useState } from "react";
 import { SortDirectionValue } from "@/services/devnote/types";
 import { twMerge } from "tailwind-merge";
+import { useTheme } from "@/context/theme-provider";
 
 const Home = () => {
   const { user } = useUser();
   const [sortDirection, setSortDirection] = useState<SortDirectionValue>("1");
   const [category, setCategory] = useState("ALL");
   const [makeFilterOptionSticky, setMakeFilterOptionSticky] = useState(false);
+  const { isDarkTheme } = useTheme();
 
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
@@ -66,8 +68,9 @@ const Home = () => {
           <div
             className={twMerge(
               makeFilterOptionSticky
-                ? "fixed top-0 left-0 right-0 mx-52"
+                ? "fixed top-0 left-0 right-0 mx-[200px] p-2 mt-1 rounded-md"
                 : "static w-full",
+              isDarkTheme ? "bg-background/70" : "bg-white/70",
               "flex items-center justify-between z-10"
             )}
           >
