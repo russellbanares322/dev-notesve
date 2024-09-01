@@ -10,7 +10,7 @@ import { FilePlus2 } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import DevNoteCard from "../devnote/DevNoteCard";
 import DevNoteFilterOptions from "../devnote/DevNoteFilterOptions";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { SortDirectionValue } from "@/services/devnote/types";
 
 const Home = () => {
