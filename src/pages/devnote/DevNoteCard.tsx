@@ -43,7 +43,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
   };
 
   return (
-    <div className="border rounded-tl-md rounded-tr-md">
+    <div className="border rounded-tl-md rounded-tr-md mb-20">
       <div className="flex items-start justify-between">
         <div className="p-2">
           <p className="font-semibold">{truncateString(title)}</p>

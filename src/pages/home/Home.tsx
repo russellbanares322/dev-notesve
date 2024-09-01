@@ -12,6 +12,7 @@ import DevNoteCard from "../devnote/DevNoteCard";
 import DevNoteFilterOptions from "../devnote/DevNoteFilterOptions";
 import { useEffect, useState } from "react";
 import { SortDirectionValue } from "@/services/devnote/types";
+import { twMerge } from "tailwind-merge";
 
 const Home = () => {
   const { user } = useUser();
@@ -35,7 +36,7 @@ const Home = () => {
   };
 
   const onMakeFilterOptionSticky = () => {
-    return setMakeFilterOptionSticky(window.scrollY > 10);
+    return setMakeFilterOptionSticky(window.scrollY > 130);
   };
 
   useEffect(() => {
@@ -62,7 +63,14 @@ const Home = () => {
       )}
       {!isDataEmpty && (
         <div className="mt-10 space-y-5 min-h-screen h-full">
-          <div className="flex items-center justify-between border border-solid">
+          <div
+            className={twMerge(
+              makeFilterOptionSticky
+                ? "fixed top-0 left-0 right-0 mx-52"
+                : "static w-full",
+              "flex items-center justify-between z-10"
+            )}
+          >
             {/* Devnote Filter Options */}
             <DevNoteFilterOptions
               onSelectSortDirection={onSelectSortDirection}
@@ -70,8 +78,6 @@ const Home = () => {
               onSelectCategory={onSelectCategory}
               category={category}
             />
-            {/* Pagination */}
-            <Pagination />
             {/* Add Devnote Button */}
             <CreateUpdateNoteModal
               buttonTrigger={
@@ -87,6 +93,7 @@ const Home = () => {
               <DevNoteCard {...item} />
             ))}
           </div>
+          <Pagination />
         </div>
       )}
       <Outlet />

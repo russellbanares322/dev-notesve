@@ -5,7 +5,7 @@ const Pagination = () => {
   const customArray = new Array(5);
 
   return (
-    <div className="flex items-center gap-1 justify-center mr-48">
+    <div className="flex items-center gap-1 justify-center pt-10">
       <Button variant="outline">
         <ChevronLeft />
       </Button>
