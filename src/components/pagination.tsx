@@ -1,7 +1,11 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 
-const Pagination = () => {
+type PaginationProps = {
+  pageNumber: number;
+};
+
+const Pagination = ({ pageNumber = 1 }: PaginationProps) => {
   const customArray = new Array(5);
 
   return (
@@ -10,7 +14,10 @@ const Pagination = () => {
         <ChevronLeft />
       </Button>
       {customArray.fill("").map((_, index) => (
-        <Button key={index} variant="outline">
+        <Button
+          key={index}
+          variant={pageNumber === index + 1 ? "default" : "outline"}
+        >
           {index + 1}
         </Button>
       ))}
