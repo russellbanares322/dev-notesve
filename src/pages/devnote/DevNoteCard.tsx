@@ -16,6 +16,7 @@ import {
   ShadCnDialogTitle,
   ShadCnDialogTrigger,
 } from "@/components/ui/shadcn-dialog";
+import { useToast } from "@/components/ui/use-toast";
 import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
@@ -30,6 +31,7 @@ type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { devnote_id, title, content, date_created, category } = props;
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const { toast } = useToast();
 
   const onCloseDeleteDialog = () => {
     setOpenDeleteDialog(false);
@@ -40,6 +42,20 @@ const DevNoteCard = (props: DevNoteCardProps) => {
 
   const onDropdownMenuActionClick = (key: string) => {
     return console.log(key);
+  };
+
+  const onCopyCode = () => {
+    try {
+      navigator.clipboard.writeText(content);
+      toast({
+        description: "Successfully copied code to clipboard",
+      });
+    } catch (error) {
+      toast({
+        description: "Failed to copy code",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -117,7 +133,10 @@ const DevNoteCard = (props: DevNoteCardProps) => {
         >
           {`${content}`}
         </SyntaxHighlighter>
-        <Copy className="absolute top-2 right-2 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200" />
+        <Copy
+          onClick={onCopyCode}
+          className="absolute top-2 right-2 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"
+        />
       </div>
     </div>
   );
