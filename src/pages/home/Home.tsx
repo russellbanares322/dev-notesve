@@ -96,7 +96,7 @@ const Home = () => {
               <DevNoteCard {...item} />
             ))}
           </div>
-          <Pagination />
+          <Pagination pageNumber={1} />
         </div>
       )}
       <Outlet />
