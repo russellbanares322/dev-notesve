@@ -58,7 +58,6 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     }
   };
 
-  // Implement pagination logic
   return (
     <div className="border rounded-tl-md rounded-tr-md mb-20">
       <div className="flex items-start justify-between">

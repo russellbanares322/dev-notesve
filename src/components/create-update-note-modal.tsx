@@ -33,6 +33,8 @@ import { Label } from "./ui/label";
 
 type CreateUpdateNoteModalProps = {
   buttonTrigger: React.ReactNode;
+  isDataForUpdate?: boolean;
+  fetchedDataForUpdate?: DevNotes;
 };
 
 type CreateNoteInputs = Pick<DevNotes, "title" | "category">;
