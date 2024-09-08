@@ -7,7 +7,8 @@ export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams)
         params: {
             author_id: params.author_id,
             sort_direction: params.sort_direction,
-            category: params.category
+            category: params.category,
+            page_size: params.page_size
         }
     }
 

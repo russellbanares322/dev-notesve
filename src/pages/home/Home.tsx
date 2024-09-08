@@ -27,6 +27,7 @@ const Home = () => {
     author_id: user?.id as string,
     sort_direction: sortDirection,
     category: category === "ALL" ? "" : category,
+    page_size: 10,
   });
   const isDataEmpty = data?.length === 0;
 
