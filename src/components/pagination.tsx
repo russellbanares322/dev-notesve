@@ -3,9 +3,13 @@ import { Button } from "./ui/button";
 
 type PaginationProps = {
   pageNumber: number;
+  onPageNumberChange: (selectedPageNumber: number) => void;
 };
 
-const Pagination = ({ pageNumber = 1 }: PaginationProps) => {
+const Pagination = ({
+  pageNumber = 1,
+  onPageNumberChange,
+}: PaginationProps) => {
   const customArray = new Array(5);
 
   return (
@@ -13,14 +17,18 @@ const Pagination = ({ pageNumber = 1 }: PaginationProps) => {
       <Button variant="outline">
         <ChevronLeft />
       </Button>
-      {customArray.fill("").map((_, index) => (
-        <Button
-          key={index}
-          variant={pageNumber === index + 1 ? "default" : "outline"}
-        >
-          {index + 1}
-        </Button>
-      ))}
+      {customArray.fill("").map((_, index) => {
+        const buttonIndex = index + 1;
+        return (
+          <Button
+            key={index}
+            onClick={() => onPageNumberChange(buttonIndex)}
+            variant={pageNumber === buttonIndex ? "default" : "outline"}
+          >
+            {buttonIndex}
+          </Button>
+        );
+      })}
       <Button variant="outline">
         <ChevronRight />
       </Button>

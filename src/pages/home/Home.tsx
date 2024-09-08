@@ -21,6 +21,7 @@ const Home = () => {
   const [category, setCategory] = useState("ALL");
   const [makeFilterOptionSticky, setMakeFilterOptionSticky] = useState(false);
   const { isDarkTheme } = useTheme();
+  const [pageNumber, setPageNumber] = useState(1);
 
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
@@ -41,6 +42,9 @@ const Home = () => {
     return setMakeFilterOptionSticky(window.scrollY > 130);
   };
 
+  const onPageNumberChange = (selectedPageNumber: number) => {
+    setPageNumber(selectedPageNumber);
+  };
   useEffect(() => {
     window.addEventListener("scroll", onMakeFilterOptionSticky);
     return () => {
@@ -96,7 +100,10 @@ const Home = () => {
               <DevNoteCard {...item} />
             ))}
           </div>
-          <Pagination pageNumber={1} />
+          <Pagination
+            pageNumber={pageNumber}
+            onPageNumberChange={onPageNumberChange}
+          />
         </div>
       )}
       <Outlet />
