@@ -23,7 +23,6 @@ export const useGetDevNote = (devnote_id: string) => {
     })
 }
 
-
 export const useGetDevNoteCategories = () => {
     const {user} = useUser()
     
