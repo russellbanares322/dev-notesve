@@ -22,7 +22,7 @@ const Home = () => {
   const [makeFilterOptionSticky, setMakeFilterOptionSticky] = useState(false);
   const { isDarkTheme } = useTheme();
   const [pageNumber, setPageNumber] = useState(1);
-
+  useGetDevNotesByAuthorId;
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
     sort_direction: sortDirection,
@@ -31,6 +31,7 @@ const Home = () => {
   });
   const isDataEmpty = data?.length === 0;
 
+  // Remove console logs
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
   };
