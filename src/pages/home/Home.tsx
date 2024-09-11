@@ -46,6 +46,7 @@ const Home = () => {
   const onPageNumberChange = (selectedPageNumber: number) => {
     setPageNumber(selectedPageNumber);
   };
+
   useEffect(() => {
     window.addEventListener("scroll", onMakeFilterOptionSticky);
     return () => {

@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button, CreateUpdateNoteModal } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -89,13 +89,14 @@ const DevNoteCard = (props: DevNoteCardProps) => {
                     </DropdownMenuItem>
                   </ShadCnDialogTrigger>
                 ) : (
-                  <DropdownMenuItem
-                    onClick={() => onDropdownMenuActionClick(action.key)}
-                    key={action.key}
-                  >
-                    {action.icon}
-                    {action.title}
-                  </DropdownMenuItem>
+                  <CreateUpdateNoteModal
+                    buttonTrigger={
+                      <DropdownMenuItem key={action.key}>
+                        {action.icon}
+                        {action.title}
+                      </DropdownMenuItem>
+                    }
+                  />
                 );
               })}
             </DropdownMenuContent>
