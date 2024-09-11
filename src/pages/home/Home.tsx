@@ -31,7 +31,6 @@ const Home = () => {
   });
   const isDataEmpty = data?.length === 0;
 
-  // Remove console logs
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
   };
