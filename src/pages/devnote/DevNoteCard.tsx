@@ -40,10 +40,6 @@ const DevNoteCard = (props: DevNoteCardProps) => {
   const { mutate: deleteDevNoteMutation } =
     useDeleteDevNote(onCloseDeleteDialog);
 
-  const onDropdownMenuActionClick = (key: string) => {
-    return console.log(key);
-  };
-
   const onCopyCode = () => {
     try {
       navigator.clipboard.writeText(content);
