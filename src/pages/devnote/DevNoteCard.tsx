@@ -54,6 +54,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     }
   };
 
+  //Fix update modal
   return (
     <div className="border rounded-tl-md rounded-tr-md mb-20">
       <div className="flex items-start justify-between">
