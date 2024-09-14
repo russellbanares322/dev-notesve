@@ -14,7 +14,11 @@ const Pagination = ({
 
   return (
     <div className="flex items-center gap-1 justify-center pt-10">
-      <Button variant="outline">
+      <Button
+        disabled={pageNumber === 1}
+        onClick={() => onPageNumberChange(pageNumber - 1)}
+        variant="outline"
+      >
         <ChevronLeft />
       </Button>
       {customArray.fill("").map((_, index) => {
@@ -29,7 +33,10 @@ const Pagination = ({
           </Button>
         );
       })}
-      <Button variant="outline">
+      <Button
+        onClick={() => onPageNumberChange(pageNumber + 1)}
+        variant="outline"
+      >
         <ChevronRight />
       </Button>
     </div>
