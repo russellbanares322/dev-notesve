@@ -98,7 +98,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             <ShadCnDialogHeader>
               <ShadCnDialogTitle>Are you sure?</ShadCnDialogTitle>
               <ShadCnDialogDescription>
-                Do you want to delete the entry? Deleting this entry cannot be
+                Do you want to delete the data? Deleting this entry cannot be
                 undone.
               </ShadCnDialogDescription>
             </ShadCnDialogHeader>
