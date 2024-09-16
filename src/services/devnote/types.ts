@@ -16,6 +16,7 @@ export type GetDevNotesByAuthorIdParams = {
     sort_direction: SortDirectionValue
     category: string;
     page_size: number;
+    page_number: number
 }
 
 export type CreateDevNoteParams = {

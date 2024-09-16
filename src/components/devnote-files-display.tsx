@@ -17,6 +17,7 @@ const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
     sort_direction: "0" as SortDirectionValue,
     category: "",
     page_size: 10,
+    page_number: 1,
   });
   const filteredDevNotes = data?.filter((note) => note.category === category);
   const { onSelectDevNote } = useDisplayDevNotesStore();

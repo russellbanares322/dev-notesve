@@ -28,6 +28,7 @@ const Home = () => {
     sort_direction: sortDirection,
     category: category === "ALL" ? "" : category,
     page_size: 10,
+    page_number: 1,
   });
   const isDataEmpty = data?.length === 0;
 
