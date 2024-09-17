@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 type PaginationProps = {
   pageNumber: number;
   onPageNumberChange: (selectedPageNumber: number) => void;
+  pageSize: number;
 };
 
 const Pagination = ({

@@ -106,6 +106,7 @@ const Home = () => {
           <Pagination
             pageNumber={pageNumber}
             onPageNumberChange={onPageNumberChange}
+            pageSize={10}
           />
         </div>
       )}
