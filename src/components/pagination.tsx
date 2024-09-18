@@ -11,7 +11,7 @@ const Pagination = ({
   pageNumber = 1,
   onPageNumberChange,
 }: PaginationProps) => {
-  const customArray = new Array(5);
+  const paginationButtonNumberCount = new Array(5);
 
   return (
     <div className="flex items-center gap-1 justify-center pt-10">
@@ -22,7 +22,7 @@ const Pagination = ({
       >
         <ChevronLeft />
       </Button>
-      {customArray.fill("").map((_, index) => {
+      {paginationButtonNumberCount.fill("").map((_, index) => {
         const buttonIndex = index + 1;
         return (
           <Button
