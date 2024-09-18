@@ -37,7 +37,7 @@ const Pagination = ({
       <Button
         onClick={() => onPageNumberChange(pageNumber + 1)}
         variant="outline"
-        disabled={customArray.length === pageNumber}
+        disabled={paginationButtonNumberCount.length === pageNumber}
       >
         <ChevronRight />
       </Button>
