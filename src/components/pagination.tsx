@@ -11,7 +11,7 @@ const Pagination = ({
   pageNumber = 1,
   onPageNumberChange,
 }: PaginationProps) => {
-  const paginationButtonNumberCount = new Array(2);
+  const paginationButtonNumberCount = new Array(1);
 
   return (
     <div className="flex items-center gap-1 justify-center pt-10">
