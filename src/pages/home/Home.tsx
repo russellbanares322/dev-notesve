@@ -22,13 +22,14 @@ const Home = () => {
   const [makeFilterOptionSticky, setMakeFilterOptionSticky] = useState(false);
   const { isDarkTheme } = useTheme();
   const [pageNumber, setPageNumber] = useState(1);
-  useGetDevNotesByAuthorId;
+  const [pageSize, _] = useState(10);
+
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
     sort_direction: sortDirection,
     category: category === "ALL" ? "" : category,
-    page_size: 10,
-    page_number: 1,
+    page_size: pageSize,
+    page_number: pageNumber,
   });
   const isDataEmpty = data?.length === 0;
 

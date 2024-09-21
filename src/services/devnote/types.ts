@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/types"
+import { ApiResponse, TPaginationData } from "@/types/types"
 
 export type DevNotes = {
     devnote_id : number
@@ -25,6 +25,10 @@ export type CreateDevNoteParams = {
     content: string,
     author_id: string
 }
+
+export type GetDevNotesByAuthorIdResponse = ApiResponse<{
+    items: DevNotes[]
+} & TPaginationData>
 
 export type CreateDevNoteResponse = ApiResponse<CreateDevNoteParams>
 export type DevNotesCategories = string[]

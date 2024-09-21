@@ -1,14 +1,15 @@
 import { DEV_NOTES } from "@/constants/apiPaths"
 import { api } from "../axiosInstance/axiosInstance";
-import { CreateDevNoteParams, CreateDevNoteResponse, DevNotes, DevNotesCategories, GetDevNotesByAuthorIdParams } from "./types";
+import { CreateDevNoteParams, CreateDevNoteResponse, DevNotes, DevNotesCategories, GetDevNotesByAuthorIdParams, GetDevNotesByAuthorIdResponse } from "./types";
 
-export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams): Promise<DevNotes[]> => {
+export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams): Promise<GetDevNotesByAuthorIdResponse> => {
     const config = {
         params: {
             author_id: params.author_id,
             sort_direction: params.sort_direction,
             category: params.category,
-            page_size: params.page_size
+            page_size: params.page_size,
+            page_number: params.page_number
         }
     }
 
