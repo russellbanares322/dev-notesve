@@ -1,5 +1,6 @@
 
 export type TPaginationData = {
+    totalPages: number,
     pageNumber: number,
     pageSize: number
 }

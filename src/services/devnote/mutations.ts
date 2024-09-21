@@ -15,7 +15,7 @@ export const useCreateDevNote = (onClearFormInputs: () => void) => {
             })
             onClearFormInputs();
             queryClient.invalidateQueries({ queryKey: ["Devnotes"] })
-        }
+        },
     })
 }
 
