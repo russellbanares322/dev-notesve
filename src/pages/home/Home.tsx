@@ -104,12 +104,14 @@ const Home = () => {
               <DevNoteCard {...item} />
             ))}
           </div>
-          <Pagination
-            pageNumber={pageNumber}
-            onPageNumberChange={onPageNumberChange}
-            pageSize={pageSize}
-            totalPages={data?.totalPages as number}
-          />
+          {data && (
+            <Pagination
+              pageNumber={pageNumber}
+              onPageNumberChange={onPageNumberChange}
+              pageSize={pageSize}
+              totalPages={data?.totalPages as number}
+            />
+          )}
         </div>
       )}
       <Outlet />
