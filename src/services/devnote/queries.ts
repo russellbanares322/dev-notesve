@@ -26,16 +26,17 @@ export const useGetDevNote = (devnote_id: string) => {
     })
 }
 
-export const useGetDevNoteCategories = () => {
+export const useGetDevNoteCategories = (forFilter: boolean) => {
     const {user} = useUser()
     
     return useQuery({
         queryFn: () => getDevNoteCategories(user?.id as string),
         queryKey: ["Devnotes"],
         select: (data) => {
-            const filteredData = [...new Set(data.map((category: string) => category.toUpperCase()))]
+            const uppercasedCategories = data.map((category: string) => category.toUpperCase())
+            const modifiedCategoriesData = ["ALL", ...uppercasedCategories] as string[]
 
-            return ["ALL", ...filteredData] as string[]
+            return forFilter ? modifiedCategoriesData : uppercasedCategories
         }
     })
 }

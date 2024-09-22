@@ -17,7 +17,7 @@ const CategoryFilter = ({
   onSelectCategory,
   category,
 }: CategoryFilterProps) => {
-  const { data: categoriesData } = useGetDevNoteCategories();
+  const { data: categoriesData } = useGetDevNoteCategories(true);
 
   return (
     <div>

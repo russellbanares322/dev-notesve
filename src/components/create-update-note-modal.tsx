@@ -69,7 +69,7 @@ const CreateUpdateNoteModal = ({
     setIsModalOpen(false);
   };
   const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
-  const { data: categoriesData } = useGetDevNoteCategories();
+  const { data: categoriesData } = useGetDevNoteCategories(false);
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),

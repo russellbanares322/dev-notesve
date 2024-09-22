@@ -15,7 +15,7 @@ const Pagination = ({
   pageSize,
 }: PaginationProps) => {
   const paginationButtonNumberCount = new Array(
-    Math.ceil(totalPages / pageSize)
+    Math?.ceil(totalPages / pageSize)
   )?.fill("");
 
   return (
