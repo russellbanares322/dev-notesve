@@ -19,7 +19,9 @@ const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
     page_size: 10,
     page_number: 1,
   });
-  const filteredDevNotes = data?.filter((note) => note.category === category);
+  const filteredDevNotes = data?.items?.filter(
+    (note) => note.category === category
+  );
   const { onSelectDevNote } = useDisplayDevNotesStore();
   const navigate = useNavigate();
 
