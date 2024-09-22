@@ -31,7 +31,7 @@ const Home = () => {
     page_size: pageSize,
     page_number: pageNumber,
   });
-  const isDataEmpty = data?.length === 0;
+  const isDataEmpty = data?.items?.length === 0;
 
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
@@ -100,14 +100,15 @@ const Home = () => {
           </div>
           {/* Devnote Card */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-            {data?.map((item) => (
+            {data?.items?.map((item) => (
               <DevNoteCard {...item} />
             ))}
           </div>
           <Pagination
             pageNumber={pageNumber}
             onPageNumberChange={onPageNumberChange}
-            pageSize={10}
+            pageSize={pageSize}
+            totalPages={data?.totalPages as number}
           />
         </div>
       )}

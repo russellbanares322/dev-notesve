@@ -8,10 +8,13 @@ export const useGetDevNotesByAuthorId = (params: GetDevNotesByAuthorIdParams) =>
         queryFn: () => getDevNotesByAuthorId(params),
         queryKey: ["Devnotes", params],
         select: (data) => {
-            return data?.data?.items?.map((note) => ({
-                ...note,
-                category: note.category.toUpperCase()
-            }))
+            return {
+                ...data?.data,
+                items: data?.data?.items?.map((note) => ({
+                    ...note,
+                    category: note.category.toUpperCase()
+                }))
+            }
         }
     })
 }

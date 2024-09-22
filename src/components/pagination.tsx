@@ -5,13 +5,18 @@ type PaginationProps = {
   pageNumber: number;
   onPageNumberChange: (selectedPageNumber: number) => void;
   pageSize: number;
+  totalPages: number;
 };
 
 const Pagination = ({
   pageNumber = 1,
   onPageNumberChange,
+  totalPages,
+  pageSize,
 }: PaginationProps) => {
-  const paginationButtonNumberCount = new Array(1);
+  const paginationButtonNumberCount = new Array(
+    Math.ceil(totalPages / pageSize)
+  )?.fill("");
 
   return (
     <div className="flex items-center gap-1 justify-center pt-10">
@@ -22,7 +27,7 @@ const Pagination = ({
       >
         <ChevronLeft />
       </Button>
-      {paginationButtonNumberCount.fill("").map((_, index) => {
+      {paginationButtonNumberCount?.map((_, index) => {
         const buttonIndex = index + 1;
         return (
           <Button
