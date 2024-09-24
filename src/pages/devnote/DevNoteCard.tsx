@@ -54,6 +54,12 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     }
   };
 
+  const onActionClick = (key: string) => {
+    if (key === "delete") {
+      return deleteDevNoteMutation(devnote_id);
+    }
+  };
+
   return (
     <div className="border rounded-tl-md rounded-tr-md mb-20">
       <div className="flex items-start justify-between">
@@ -64,53 +70,24 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             Date Created: {moment(date_created).format("LLL")}
           </p>
         </div>
-        <ShadCnDialog
-          open={openDeleteDialog}
-          onOpenChange={setOpenDeleteDialog}
-        >
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm">
-                <Ellipsis />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {dedvNoteCardActions.map((action) => {
-                const isActionForDelete = action.key === "Delete";
-                return isActionForDelete ? (
-                  <ShadCnDialogTrigger key={action.key}>
-                    <DropdownMenuItem>
-                      {action.icon}
-                      {action.title}
-                    </DropdownMenuItem>
-                  </ShadCnDialogTrigger>
-                ) : (
-                  <DropdownMenuItem key={action.key}>
-                    {action.icon}
-                    {action.title}
-                  </DropdownMenuItem>
-                );
-              })}
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <ShadCnDialogContent>
-            <ShadCnDialogHeader>
-              <ShadCnDialogTitle>Are you sure?</ShadCnDialogTitle>
-              <ShadCnDialogDescription>
-                Do you want to delete the data? Deleting this entry cannot be
-                undone.
-              </ShadCnDialogDescription>
-            </ShadCnDialogHeader>
-            <ShadCnDialogFooter>
-              <ShadCnDialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </ShadCnDialogClose>
-              <Button onClick={() => deleteDevNoteMutation(devnote_id)}>
-                Delete
-              </Button>
-            </ShadCnDialogFooter>
-          </ShadCnDialogContent>
-        </ShadCnDialog>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm">
+              <Ellipsis />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {dedvNoteCardActions.map((action) => (
+              <DropdownMenuItem
+                onClick={() => onActionClick(action.key)}
+                key={action.key}
+              >
+                {action.icon}
+                {action.title}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       <div className="relative group h-full w-full">
         <SyntaxHighlighter
