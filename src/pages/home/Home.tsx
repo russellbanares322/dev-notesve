@@ -23,6 +23,8 @@ const Home = () => {
   const { isDarkTheme } = useTheme();
   const [pageNumber, setPageNumber] = useState(1);
   const [pageSize, _] = useState(10);
+  const [openCreateUpdateNoteModal, setOpenCreateUpdateNoteModal] =
+    useState(false);
 
   const { data } = useGetDevNotesByAuthorId({
     author_id: user?.id as string,
@@ -49,6 +51,10 @@ const Home = () => {
     setPageNumber(selectedPageNumber);
   };
 
+  const handleOpenCreateUpdateNoteModal = () => {
+    setOpenCreateUpdateNoteModal(true);
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", onMakeFilterOptionSticky);
     return () => {
@@ -62,13 +68,9 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />
           <h1 className="text-xl">Browse or create new note</h1>
-          <CreateUpdateNoteModal
-            buttonTrigger={
-              <Button>
-                Create new note <FilePlus2 className="ml-1" />
-              </Button>
-            }
-          />
+          <Button onClick={handleOpenCreateUpdateNoteModal}>
+            Create new note <FilePlus2 className="ml-1" />
+          </Button>
         </div>
       )}
       {!isDataEmpty && (
@@ -90,13 +92,9 @@ const Home = () => {
               category={category}
             />
             {/* Add Devnote Button */}
-            <CreateUpdateNoteModal
-              buttonTrigger={
-                <Button>
-                  Create new note <FilePlus2 className="ml-1" />
-                </Button>
-              }
-            />
+            <Button onClick={handleOpenCreateUpdateNoteModal}>
+              Create new note <FilePlus2 className="ml-1" />
+            </Button>
           </div>
           {/* Devnote Card */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
@@ -114,6 +112,10 @@ const Home = () => {
           )}
         </div>
       )}
+      <CreateUpdateNoteModal
+        open={openCreateUpdateNoteModal}
+        onOpenChange={setOpenCreateUpdateNoteModal}
+      />
       <Outlet />
     </div>
   );

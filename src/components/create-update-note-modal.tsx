@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { z } from "zod";
 import Dialog from "./dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -32,7 +32,8 @@ import { Tooltip, TooltipContent } from "./ui/tooltip";
 import { Label } from "./ui/label";
 
 type CreateUpdateNoteModalProps = {
-  buttonTrigger: React.ReactNode;
+  open: boolean;
+  onOpenChange: Dispatch<SetStateAction<boolean>>;
   isDataForUpdate?: boolean;
   fetchedDataForUpdate?: DevNotes;
 };
@@ -54,9 +55,9 @@ const CUSTOM_FORM_INPUTS_DATA = {
 };
 
 const CreateUpdateNoteModal = ({
-  buttonTrigger,
+  open,
+  onOpenChange,
 }: CreateUpdateNoteModalProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const { user } = useUser();
   const [customFormInputs, setCustomFormInputs] = useState(
     CUSTOM_FORM_INPUTS_DATA
@@ -66,7 +67,7 @@ const CreateUpdateNoteModal = ({
   const onClearFormInputs = () => {
     form.reset();
     setCustomFormInputs(CUSTOM_FORM_INPUTS_DATA);
-    setIsModalOpen(false);
+    onOpenChange(false);
   };
   const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
   const { data: categoriesData } = useGetDevNoteCategories(false);
@@ -102,12 +103,7 @@ const CreateUpdateNoteModal = ({
   };
 
   return (
-    <Dialog
-      buttonTrigger={buttonTrigger}
-      title="Create Note"
-      open={isModalOpen}
-      onOpenChange={setIsModalOpen}
-    >
+    <Dialog title="Create Note" open={open} onOpenChange={onOpenChange}>
       <Form {...form}>
         <form
           className="flex flex-col gap-2"
