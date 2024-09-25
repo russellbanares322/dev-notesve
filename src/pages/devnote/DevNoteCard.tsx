@@ -6,16 +6,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  ShadCnDialog,
-  ShadCnDialogClose,
-  ShadCnDialogContent,
-  ShadCnDialogDescription,
-  ShadCnDialogFooter,
-  ShadCnDialogHeader,
-  ShadCnDialogTitle,
-  ShadCnDialogTrigger,
-} from "@/components/ui/shadcn-dialog";
+
 import { useToast } from "@/components/ui/use-toast";
 import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
@@ -23,22 +14,17 @@ import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
 import { Copy, Ellipsis } from "lucide-react";
 import moment from "moment";
-import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { devnote_id, title, content, date_created, category } = props;
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const { toast } = useToast();
 
-  const onCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false);
-  };
-
-  const { mutate: deleteDevNoteMutation } =
-    useDeleteDevNote(onCloseDeleteDialog);
+  const { mutate: deleteDevNoteMutation } = useDeleteDevNote(() =>
+    console.log("Deleted")
+  );
 
   const onCopyCode = () => {
     try {
