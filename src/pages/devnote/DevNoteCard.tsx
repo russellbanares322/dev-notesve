@@ -1,4 +1,4 @@
-import { Button } from "@/components";
+import { Button, PopConfirm } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -6,7 +6,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-
 import { useToast } from "@/components/ui/use-toast";
 import { dedvNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
@@ -14,6 +13,7 @@ import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
 import { Copy, Ellipsis } from "lucide-react";
 import moment from "moment";
+import { useState } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
@@ -21,9 +21,10 @@ type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { devnote_id, title, content, date_created, category } = props;
   const { toast } = useToast();
+  const [openDeletePopConfirm, setOpenDeletePopConfirm] = useState(false);
 
   const { mutate: deleteDevNoteMutation } = useDeleteDevNote(() =>
-    console.log("Deleted")
+    setOpenDeletePopConfirm(false)
   );
 
   const onCopyCode = () => {
@@ -41,8 +42,8 @@ const DevNoteCard = (props: DevNoteCardProps) => {
   };
 
   const onActionClick = (key: string) => {
-    if (key === "delete") {
-      return deleteDevNoteMutation(devnote_id);
+    if (key === "Delete") {
+      return setOpenDeletePopConfirm(true);
     }
   };
 
@@ -94,6 +95,14 @@ const DevNoteCard = (props: DevNoteCardProps) => {
           className="absolute top-2 right-2 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"
         />
       </div>
+      <PopConfirm
+        open={openDeletePopConfirm}
+        onOpenChange={setOpenDeletePopConfirm}
+        onConfirm={() => deleteDevNoteMutation(devnote_id)}
+        title="Delete Note"
+        description="Do you want to delete the entry? Deleting this entry cannot be undone."
+        okText="Delete"
+      />
     </div>
   );
 };
