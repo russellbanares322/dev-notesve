@@ -101,7 +101,6 @@ const DevNoteCard = (props: DevNoteCardProps) => {
         onConfirm={() => deleteDevNoteMutation(devnote_id)}
         title="Delete Note"
         description="Do you want to delete the entry? Deleting this entry cannot be undone."
-        okText="Delete"
       />
     </div>
   );
