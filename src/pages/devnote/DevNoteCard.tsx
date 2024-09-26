@@ -1,4 +1,4 @@
-import { Button, PopConfirm } from "@/components";
+import { Button, CreateUpdateNoteModal, PopConfirm } from "@/components";
 import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
@@ -20,8 +20,16 @@ import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { devnote_id, title, content, date_created, category } = props;
+  const dataForUpdateValue: Omit<DevNotes, "date_created" | "author_id"> = {
+    devnote_id,
+    title,
+    content,
+    category,
+  };
+
   const { toast } = useToast();
   const [openDeletePopConfirm, setOpenDeletePopConfirm] = useState(false);
+  const [openUpdateNoteModal, setOpenUpdateNoteModal] = useState(false);
 
   const { mutate: deleteDevNoteMutation } = useDeleteDevNote(() =>
     setOpenDeletePopConfirm(false)
@@ -45,6 +53,8 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     if (key === "Delete") {
       return setOpenDeletePopConfirm(true);
     }
+
+    return setOpenUpdateNoteModal(true);
   };
 
   return (
@@ -101,6 +111,12 @@ const DevNoteCard = (props: DevNoteCardProps) => {
         onConfirm={() => deleteDevNoteMutation(devnote_id)}
         title="Delete Note"
         description="Do you want to delete the entry? Deleting this entry cannot be undone."
+      />
+      <CreateUpdateNoteModal
+        open={openUpdateNoteModal}
+        onOpenChange={setOpenUpdateNoteModal}
+        isDataForUpdate={true}
+        fetchedDataForUpdate={dataForUpdateValue}
       />
     </div>
   );

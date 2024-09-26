@@ -27,16 +27,25 @@ import { useUser } from "@clerk/clerk-react";
 import { useCreateDevNote } from "@/services/devnote/mutations";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
 import { CircleX } from "lucide-react";
-import { TooltipTrigger } from "@radix-ui/react-tooltip";
-import { Tooltip, TooltipContent } from "./ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Label } from "./ui/label";
+
+type TFetchedDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
+
+type ConditionalProps =
+  | {
+      isDataForUpdate: boolean;
+      fetchedDataForUpdate: TFetchedDataForUpdate;
+    }
+  | {
+      isDataForUpdate?: never;
+      fetchedDataForUpdate?: never;
+    };
 
 type CreateUpdateNoteModalProps = {
   open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
-  isDataForUpdate?: boolean;
-  fetchedDataForUpdate?: DevNotes;
-};
+} & ConditionalProps;
 
 type CreateNoteInputs = Pick<DevNotes, "title" | "category">;
 
