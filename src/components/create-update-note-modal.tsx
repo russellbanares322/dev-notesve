@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { z } from "zod";
 import Dialog from "./dialog";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -30,16 +30,16 @@ import { CircleX } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Label } from "./ui/label";
 
-type TFetchedDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
+type TDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
 
 type ConditionalProps =
   | {
       isDataForUpdate: boolean;
-      fetchedDataForUpdate: TFetchedDataForUpdate;
+      dataForUpdate: TDataForUpdate;
     }
   | {
       isDataForUpdate?: never;
-      fetchedDataForUpdate?: never;
+      dataForUpdate?: never;
     };
 
 type CreateUpdateNoteModalProps = {
@@ -66,6 +66,8 @@ const CUSTOM_FORM_INPUTS_DATA = {
 const CreateUpdateNoteModal = ({
   open,
   onOpenChange,
+  isDataForUpdate,
+  dataForUpdate,
 }: CreateUpdateNoteModalProps) => {
   const { user } = useUser();
   const [customFormInputs, setCustomFormInputs] = useState(
@@ -111,8 +113,25 @@ const CreateUpdateNoteModal = ({
     });
   };
 
+  //Set a value for inputs if it is for update
+
+  useEffect(() => {
+    if (isDataForUpdate) {
+      form.setValue("title", dataForUpdate.title);
+      form.setValue("category", dataForUpdate.category);
+      setCustomFormInputs({
+        ...customFormInputs,
+        noteContent: dataForUpdate.content,
+      });
+    }
+  }, [isDataForUpdate]);
+
   return (
-    <Dialog title="Create Note" open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      title={isDataForUpdate ? "Update Note" : "Create Note"}
+      open={open}
+      onOpenChange={onOpenChange}
+    >
       <Form {...form}>
         <form
           className="flex flex-col gap-2"
@@ -229,7 +248,9 @@ const CreateUpdateNoteModal = ({
               }
             />
           </div>
-          <Button type="submit">Submit</Button>
+          <Button disabled={isDataForUpdate} type="submit">
+            {isDataForUpdate ? "Save Changes" : "Submit"}
+          </Button>
         </form>
       </Form>
     </Dialog>

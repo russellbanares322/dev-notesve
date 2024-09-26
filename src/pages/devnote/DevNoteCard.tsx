@@ -116,7 +116,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
         open={openUpdateNoteModal}
         onOpenChange={setOpenUpdateNoteModal}
         isDataForUpdate={true}
-        fetchedDataForUpdate={dataForUpdateValue}
+        dataForUpdate={dataForUpdateValue}
       />
     </div>
   );
