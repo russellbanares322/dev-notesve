@@ -100,7 +100,11 @@ const CreateUpdateNoteModal = ({
       author_id: user?.id as string,
     };
 
-    createDevNoteMutation(body);
+    if (!isDataForUpdate) {
+      return createDevNoteMutation(body);
+    }
+
+    return console.log("Update feature under development :)");
   };
 
   const onCustomFormInputsValueChange = (
