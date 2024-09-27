@@ -104,6 +104,7 @@ const CreateUpdateNoteModal = ({
       return createDevNoteMutation(body);
     }
 
+    // Use update devnote api call
     return console.log("Update feature under development :)");
   };
 
