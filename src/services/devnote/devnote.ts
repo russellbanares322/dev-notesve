@@ -1,6 +1,6 @@
 import { DEV_NOTES } from "@/constants/apiPaths"
 import { api } from "../axiosInstance/axiosInstance";
-import { CreateDevNoteParams, CreateDevNoteResponse, DevNotes, DevNotesCategories, GetDevNotesByAuthorIdParams, GetDevNotesByAuthorIdResponse } from "./types";
+import { CreateDevNoteParams, CreateDevNoteResponse, DevNotes, DevNotesCategories, GetDevNotesByAuthorIdParams, GetDevNotesByAuthorIdResponse, UpdateDevNoteParams, UpdateDevNoteResponse } from "./types";
 
 export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams): Promise<GetDevNotesByAuthorIdResponse> => {
     const config = {
@@ -43,6 +43,21 @@ export const createDevNote = async (postParams: CreateDevNoteParams): Promise<Cr
 
     return response.data;
 }
+
+export const updateDevNote = async (postParams: UpdateDevNoteParams): Promise<UpdateDevNoteResponse> => {
+    const body = {
+        id: postParams.id,
+        title: postParams.title,
+        category: postParams.category,
+        content: postParams.content
+    };
+
+    const response = await api.put(`${DEV_NOTES}/${postParams.id}`, body);
+
+    return response.data;
+}
+
+
 
 export const deleteDevNote = async (devnote_id: number) => {
     const response = await api.delete(`${DEV_NOTES}/${devnote_id}`);

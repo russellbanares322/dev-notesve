@@ -26,9 +26,14 @@ export type CreateDevNoteParams = {
     author_id: string
 }
 
+export type UpdateDevNoteParams = CreateDevNoteParams & {
+    id: number
+}
+
 export type GetDevNotesByAuthorIdResponse = ApiResponse<{
     items: DevNotes[]
 } & TPaginationData>
 
 export type CreateDevNoteResponse = ApiResponse<CreateDevNoteParams>
+export type UpdateDevNoteResponse = ApiResponse<CreateDevNoteParams>
 export type DevNotesCategories = string[]
