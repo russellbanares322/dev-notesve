@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { createDevNote, deleteDevNote } from "./devnote"
-import { CreateDevNoteParams } from "./types"
+import { createDevNote, deleteDevNote, updateDevNote } from "./devnote"
+import { CreateDevNoteParams, UpdateDevNoteParams } from "./types"
 import { useDisplayToast } from "@/hooks"
 
 export const useCreateDevNote = (onClearFormInputs: () => void) => {
@@ -9,6 +9,20 @@ export const useCreateDevNote = (onClearFormInputs: () => void) => {
 
     return useMutation({
         mutationFn: (postParams: CreateDevNoteParams) => createDevNote(postParams),
+        onSuccess: (response) => {
+            showToast("success","Successfully created note", response?.successMessage)
+            onClearFormInputs();
+            queryClient.invalidateQueries({ queryKey: ["Devnotes"] })
+        },
+    })
+}
+
+export const useUpdateDevNote = (onClearFormInputs: () => void) => {
+    const { showToast } = useDisplayToast();
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (postParams: UpdateDevNoteParams) => updateDevNote(postParams),
         onSuccess: (response) => {
             showToast("success","Successfully created note", response?.successMessage)
             onClearFormInputs();
