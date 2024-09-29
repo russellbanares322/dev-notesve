@@ -116,7 +116,9 @@ const CreateUpdateNoteModal = ({
 
     // Use update devnote api call
     return updateDevNoteMutation({
-      ...body,
+      title: body.title,
+      category: body.category,
+      content: body.content,
       id: dataForUpdate?.devnote_id,
     });
   };

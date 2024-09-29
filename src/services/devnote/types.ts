@@ -26,7 +26,7 @@ export type CreateDevNoteParams = {
     author_id: string
 }
 
-export type UpdateDevNoteParams = CreateDevNoteParams & {
+export type UpdateDevNoteParams = Omit<CreateDevNoteParams, "author_id"> & {
     id: number
 }
 

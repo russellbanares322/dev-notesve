@@ -46,7 +46,6 @@ export const createDevNote = async (postParams: CreateDevNoteParams): Promise<Cr
 
 export const updateDevNote = async (postParams: UpdateDevNoteParams): Promise<UpdateDevNoteResponse> => {
     const body = {
-        id: postParams.id,
         title: postParams.title,
         category: postParams.category,
         content: postParams.content
