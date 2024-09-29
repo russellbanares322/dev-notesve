@@ -83,8 +83,14 @@ const CreateUpdateNoteModal = ({
     setCustomFormInputs(CUSTOM_FORM_INPUTS_DATA);
     onOpenChange(false);
   };
-  const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
-  const { mutate: updateDevNoteMutation } = useUpdateDevNote(onClearFormInputs);
+  const {
+    mutate: createDevNoteMutation,
+    isPending: isCreateDevNoteMutaionPending,
+  } = useCreateDevNote(onClearFormInputs);
+  const {
+    mutate: updateDevNoteMutation,
+    isPending: isUpdateDevNoteMutaionPending,
+  } = useUpdateDevNote(onClearFormInputs);
   const { data: categoriesData } = useGetDevNoteCategories(false);
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
@@ -260,7 +266,12 @@ const CreateUpdateNoteModal = ({
               }
             />
           </div>
-          <Button disabled={isDataForUpdate} type="submit">
+          <Button
+            disabled={
+              isCreateDevNoteMutaionPending || isUpdateDevNoteMutaionPending
+            }
+            type="submit"
+          >
             {isDataForUpdate ? "Save Changes" : "Submit"}
           </Button>
         </form>
