@@ -24,7 +24,10 @@ import {
 } from "./ui/select";
 import Editor from "@monaco-editor/react";
 import { useUser } from "@clerk/clerk-react";
-import { useCreateDevNote } from "@/services/devnote/mutations";
+import {
+  useCreateDevNote,
+  useUpdateDevNote,
+} from "@/services/devnote/mutations";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
 import { CircleX } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
@@ -81,6 +84,7 @@ const CreateUpdateNoteModal = ({
     onOpenChange(false);
   };
   const { mutate: createDevNoteMutation } = useCreateDevNote(onClearFormInputs);
+  const { mutate: updateDevNoteMutation } = useUpdateDevNote(onClearFormInputs);
   const { data: categoriesData } = useGetDevNoteCategories(false);
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
@@ -105,7 +109,10 @@ const CreateUpdateNoteModal = ({
     }
 
     // Use update devnote api call
-    return console.log("Update feature under development :)");
+    return updateDevNoteMutation({
+      ...body,
+      id: dataForUpdate?.devnote_id,
+    });
   };
 
   const onCustomFormInputsValueChange = (
