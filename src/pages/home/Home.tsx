@@ -78,10 +78,10 @@ const Home = () => {
           <div
             className={twMerge(
               makeFilterOptionSticky
-                ? "fixed top-0 left-0 right-0 mx-[200px] p-2 mt-1 rounded-md"
+                ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 mt-1 rounded-md shadow-md"
                 : "static w-full",
-              isDarkTheme ? "bg-background/70" : "bg-white/70",
-              "flex items-center justify-between z-10"
+              isDarkTheme ? "bg-background/70" : "bg-white/90",
+              "flex flex-wrap-reverse items-center justify-between z-10"
             )}
           >
             {/* Devnote Filter Options */}
@@ -96,8 +96,9 @@ const Home = () => {
               Create new note <FilePlus2 className="ml-1" />
             </Button>
           </div>
+          <hr />
           {/* Devnote Card */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
             {data?.items?.map((item) => (
               <DevNoteCard {...item} />
             ))}

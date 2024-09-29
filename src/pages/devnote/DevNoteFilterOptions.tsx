@@ -16,7 +16,7 @@ const DevNoteFilterOptions = ({
   category,
 }: DevNoteFilterOptionsProps) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-10">
       <CategoryFilter onSelectCategory={onSelectCategory} category={category} />
       <SortFilter
         onSelectSortDirection={onSelectSortDirection}
