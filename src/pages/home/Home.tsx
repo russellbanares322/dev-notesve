@@ -98,7 +98,7 @@ const Home = () => {
           </div>
           <hr />
           {/* Devnote Card */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
             {data?.items?.map((item) => (
               <DevNoteCard {...item} />
             ))}
