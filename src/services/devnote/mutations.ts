@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createDevNote, deleteDevNote, updateDevNote } from "./devnote"
 import { CreateDevNoteParams, UpdateDevNoteParams } from "./types"
 import { useDisplayToast } from "@/hooks"
+import { QueryError } from "@/types/types"
 
 export const useCreateDevNote = (onClearFormInputs: () => void) => {
     const { showToast } = useDisplayToast();
@@ -14,6 +15,9 @@ export const useCreateDevNote = (onClearFormInputs: () => void) => {
             onClearFormInputs();
             queryClient.invalidateQueries({ queryKey: ["Devnotes"] })
         },
+        onError:(response: QueryError) => {
+            showToast("error", "Failed to create note", response?.response?.data?.errorMessage)
+        }
     })
 }
 
@@ -28,6 +32,9 @@ export const useUpdateDevNote = (onClearFormInputs: () => void) => {
             onClearFormInputs();
             queryClient.invalidateQueries({ queryKey: ["Devnotes"] })
         },
+        onError:(response: QueryError) => {
+            showToast("error", "Failed to create note", response?.response?.data?.errorMessage)
+        }
     })
 }
 

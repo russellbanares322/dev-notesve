@@ -12,3 +12,9 @@ export type ApiResponse<T> = {
     errorMessage: string | null,
     successMessage: string
 }
+
+export type QueryError = {
+    response: {
+        data: ApiResponse<null>
+    }
+}
