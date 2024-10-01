@@ -94,7 +94,6 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             fontWeight: "bold",
             margin: 0,
             height: "100%",
-            whiteSpace: "normal",
           }}
           language="javascript"
           style={coldarkCold}
