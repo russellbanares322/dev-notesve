@@ -1,4 +1,4 @@
-import { Home } from "@/pages";
+import { Home, PageNotFound } from "@/pages";
 
 type Routes = {
   path: string;
@@ -12,5 +12,10 @@ export const routes: Routes[] = [
     path: "/",
     name: "Home",
     element: <Home />,
+  },
+  {
+    path: "*",
+    name: "404",
+    element: <PageNotFound />,
   },
 ];
