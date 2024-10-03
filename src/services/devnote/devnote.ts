@@ -5,6 +5,7 @@ import { CreateDevNoteParams, CreateDevNoteResponse, DevNotes, DevNotesCategorie
 export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams): Promise<GetDevNotesByAuthorIdResponse> => {
     const config = {
         params: {
+            search: params.search,
             author_id: params.author_id,
             sort_direction: params.sort_direction,
             category: params.category,

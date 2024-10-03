@@ -19,6 +19,7 @@ const Home = () => {
   const { user } = useUser();
   const [sortDirection, setSortDirection] = useState<SortDirectionValue>("1");
   const [category, setCategory] = useState("ALL");
+  const [search, setSearch] = useState("");
   const [makeFilterOptionSticky, setMakeFilterOptionSticky] = useState(false);
   const { isDarkTheme } = useTheme();
   const [pageNumber, setPageNumber] = useState(1);
@@ -41,6 +42,10 @@ const Home = () => {
 
   const onSelectCategory = (value: string) => {
     setCategory(value);
+  };
+
+  const onSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   const onMakeFilterOptionSticky = () => {
@@ -89,7 +94,9 @@ const Home = () => {
               onSelectSortDirection={onSelectSortDirection}
               currentSelectedSortDirection={sortDirection}
               onSelectCategory={onSelectCategory}
+              onSearchChange={onSearchChange}
               category={category}
+              search={search}
             />
             {/* Add Devnote Button */}
             <Button onClick={handleOpenCreateUpdateNoteModal}>
