@@ -14,7 +14,7 @@ const useDebounce = <T, > (value: T) => {
         },DEBOUNCE_TIMEOUT);
 
         return () => clearTimeout(debounceTimeout);
-    }, [])
+    }, [value])
 
   return  { debouncedValue, isUserTyping }
 }

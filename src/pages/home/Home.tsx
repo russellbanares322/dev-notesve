@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { SortDirectionValue } from "@/services/devnote/types";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "@/context/theme-provider";
+import { useDebounce } from "@/hooks";
 
 const Home = () => {
   const { user } = useUser();
@@ -26,8 +27,10 @@ const Home = () => {
   const [pageSize, _] = useState(10);
   const [openCreateUpdateNoteModal, setOpenCreateUpdateNoteModal] =
     useState(false);
+  const { debouncedValue } = useDebounce<string>(search);
 
   const { data } = useGetDevNotesByAuthorId({
+    search: debouncedValue,
     author_id: user?.id as string,
     sort_direction: sortDirection,
     category: category === "ALL" ? "" : category,
