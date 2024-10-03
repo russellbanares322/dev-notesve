@@ -15,6 +15,7 @@ import { SortDirectionValue } from "@/services/devnote/types";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "@/context/theme-provider";
 import { useDebounce } from "@/hooks";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const Home = () => {
   const { user } = useUser();
@@ -27,7 +28,7 @@ const Home = () => {
   const [pageSize, _] = useState(10);
   const [openCreateUpdateNoteModal, setOpenCreateUpdateNoteModal] =
     useState(false);
-  const { debouncedValue } = useDebounce<string>(search);
+  const { debouncedValue, isUserTyping } = useDebounce<string>(search);
 
   const { data } = useGetDevNotesByAuthorId({
     search: debouncedValue,
@@ -72,7 +73,7 @@ const Home = () => {
 
   return (
     <div className="container min-h-screen h-full">
-      {isDataEmpty && (
+      {search === "" && isDataEmpty && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />
           <h1 className="text-xl">Browse or create new note</h1>
@@ -81,47 +82,58 @@ const Home = () => {
           </Button>
         </div>
       )}
-      {!isDataEmpty && (
-        <div className="mt-10 space-y-5 min-h-screen h-full">
-          <div
-            className={twMerge(
-              makeFilterOptionSticky
-                ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 mt-1 rounded-md shadow-md"
-                : "static w-full",
-              isDarkTheme ? "bg-background/70" : "bg-white/90",
-              "flex flex-wrap-reverse items-center justify-between z-10"
-            )}
-          >
-            {/* Devnote Filter Options */}
-            <DevNoteFilterOptions
-              onSelectSortDirection={onSelectSortDirection}
-              currentSelectedSortDirection={sortDirection}
-              onSelectCategory={onSelectCategory}
-              onSearchChange={onSearchChange}
-              category={category}
-              search={search}
-            />
-            {/* Add Devnote Button */}
-            <Button onClick={handleOpenCreateUpdateNoteModal}>
-              Create new note <FilePlus2 className="ml-1" />
-            </Button>
-          </div>
-          <hr />
-          {/* Devnote Card */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
-            {data?.items?.map((item) => (
-              <DevNoteCard {...item} />
-            ))}
-          </div>
-          {data && (
-            <Pagination
-              pageNumber={pageNumber}
-              onPageNumberChange={onPageNumberChange}
-              pageSize={pageSize}
-              totalPages={data?.totalPages as number}
-            />
+      <div className="mt-10 space-y-5 min-h-screen h-full">
+        <div
+          className={twMerge(
+            makeFilterOptionSticky
+              ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 mt-1 rounded-md shadow-md"
+              : "static w-full",
+            isDarkTheme ? "bg-background/70" : "bg-white/90",
+            "flex flex-wrap-reverse items-center justify-between z-10"
           )}
+        >
+          {/* Devnote Filter Options */}
+          <DevNoteFilterOptions
+            onSelectSortDirection={onSelectSortDirection}
+            currentSelectedSortDirection={sortDirection}
+            onSelectCategory={onSelectCategory}
+            onSearchChange={onSearchChange}
+            category={category}
+            search={search}
+          />
+          {/* Add Devnote Button */}
+          <Button onClick={handleOpenCreateUpdateNoteModal}>
+            Create new note <FilePlus2 className="ml-1" />
+          </Button>
         </div>
+        <hr />
+        {/* Devnote Card */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
+          {!isUserTyping &&
+            search === "" &&
+            !isDataEmpty &&
+            data?.items?.map((item) => <DevNoteCard {...item} />)}
+          {isUserTyping &&
+            Array.from({ length: 5 })
+              .fill("")
+              .map((_, index) => (
+                <Skeleton
+                  key={index}
+                  className="h-[300px] w-[350px] rounded-tl-md rounded-tr-md"
+                />
+              ))}
+        </div>
+        {data && (
+          <Pagination
+            pageNumber={pageNumber}
+            onPageNumberChange={onPageNumberChange}
+            pageSize={pageSize}
+            totalPages={data?.totalPages as number}
+          />
+        )}
+      </div>
+      {search && isDataEmpty && (
+        <h1 className="text-center">No results found</h1>
       )}
       <CreateUpdateNoteModal
         open={openCreateUpdateNoteModal}
