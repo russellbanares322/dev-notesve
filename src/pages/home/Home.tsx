@@ -73,7 +73,7 @@ const Home = () => {
 
   return (
     <div className="container min-h-screen h-full">
-      {search === "" && isDataEmpty && (
+      {search === "" && !data && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />
           <h1 className="text-xl">Browse or create new note</h1>
@@ -123,7 +123,7 @@ const Home = () => {
                 />
               ))}
         </div>
-        {data && (
+        {!isDataEmpty && data && (
           <Pagination
             pageNumber={pageNumber}
             onPageNumberChange={onPageNumberChange}
@@ -131,10 +131,12 @@ const Home = () => {
             totalPages={data?.totalPages as number}
           />
         )}
+        {search && isDataEmpty && (
+          <h1 className="text-center">
+            No matches your query: <strong>{search}</strong>
+          </h1>
+        )}
       </div>
-      {search && isDataEmpty && (
-        <h1 className="text-center">No results found</h1>
-      )}
       <CreateUpdateNoteModal
         open={openCreateUpdateNoteModal}
         onOpenChange={setOpenCreateUpdateNoteModal}
