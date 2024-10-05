@@ -71,6 +71,8 @@ const Home = () => {
     };
   }, []);
 
+  // Properly check user's information
+
   return (
     <div className="container min-h-screen h-full">
       {search === "" && !data && (
