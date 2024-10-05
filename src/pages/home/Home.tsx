@@ -71,7 +71,7 @@ const Home = () => {
     };
   }, []);
 
-  // Properly check user's information
+  // Properly check user information
 
   return (
     <div className="container min-h-screen h-full">
