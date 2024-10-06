@@ -30,7 +30,7 @@ const Home = () => {
     useState(false);
   const { debouncedValue, isUserTyping } = useDebounce<string>(search);
 
-  const { data } = useGetDevNotesByAuthorId({
+  const { data, isFetching } = useGetDevNotesByAuthorId({
     search: debouncedValue,
     author_id: user?.id as string,
     sort_direction: sortDirection,
@@ -115,7 +115,7 @@ const Home = () => {
             search === "" &&
             !isDataEmpty &&
             data?.items?.map((item) => <DevNoteCard {...item} />)}
-          {isUserTyping &&
+          {(isUserTyping || isFetching) &&
             Array.from({ length: 5 })
               .fill("")
               .map((_, index) => (
