@@ -71,8 +71,6 @@ const Home = () => {
     };
   }, []);
 
-  // Properly check user information
-
   return (
     <div className="container min-h-screen h-full">
       {search === "" && !data && (
@@ -91,7 +89,7 @@ const Home = () => {
               ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 mt-1 rounded-md shadow-md"
               : "static w-full",
             isDarkTheme ? "bg-background/70" : "bg-white/90",
-            "flex flex-wrap-reverse items-center justify-between z-10"
+            "flex items-center justify-between z-10"
           )}
         >
           {/* Devnote Filter Options */}
