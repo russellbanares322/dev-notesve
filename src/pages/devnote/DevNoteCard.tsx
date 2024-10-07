@@ -7,7 +7,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
-import { dedvNoteCardActions } from "@/data/devnote-card-actions";
+import { devNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
@@ -74,7 +74,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            {dedvNoteCardActions.map((action) => (
+            {devNoteCardActions.map((action) => (
               <DropdownMenuItem
                 onClick={() => onActionClick(action.key)}
                 key={action.key}

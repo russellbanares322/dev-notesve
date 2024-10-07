@@ -1,6 +1,6 @@
 import { FilePenLine, Trash2 } from "lucide-react";
 
-export const dedvNoteCardActions = [
+export const devNoteCardActions = [
   {
     key: "Edit",
     title: "Edit",

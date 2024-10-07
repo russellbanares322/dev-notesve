@@ -131,7 +131,7 @@ const Home = () => {
             totalPages={data?.totalPages as number}
           />
         )}
-        {search && isDataEmpty && (
+        {search.length > 0 && isDataEmpty && (
           <h1 className="text-center">
             No matches your query: <strong>{search}</strong>
           </h1>
