@@ -72,7 +72,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container min-h-screen h-full">
+    <div className="min-h-screen h-full">
       {search === "" && !data && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />

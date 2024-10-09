@@ -7,7 +7,7 @@ type ContentWrapperProps = {
 
 const ContentWrapper = ({ children }: ContentWrapperProps) => {
   return (
-    <div className="flex flex-col min-h-screen h-full max-w-[1600px] mx-auto py-5 px-10 lg:px-0 mt-2">
+    <div className="flex flex-col min-h-screen h-full md:max-w-[1600px] mx-auto py-5 px-3 md:px-10 mt-2">
       <Navbar />
       {/* Content */}
       <div className="flex flex-col w-full">
