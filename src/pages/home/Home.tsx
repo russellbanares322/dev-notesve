@@ -86,9 +86,9 @@ const Home = () => {
         <div
           className={twMerge(
             makeFilterOptionSticky
-              ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 mt-1 rounded-md shadow-md"
+              ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 rounded-md shadow-md"
               : "static w-full",
-            isDarkTheme ? "bg-background/70" : "bg-white/90",
+            isDarkTheme ? "bg-background/95" : "bg-white/95",
             "flex items-center justify-between z-10"
           )}
         >
