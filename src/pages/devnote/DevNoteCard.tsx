@@ -58,7 +58,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
   };
 
   return (
-    <div className="border rounded-tl-md rounded-tr-md mb-20">
+    <div className="border rounded-tl-md rounded-tr-md mb-2">
       <div className="flex items-start justify-between">
         <div className="p-2">
           <p className="font-semibold">{truncateString(title)}</p>
@@ -86,7 +86,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="relative group h-full w-full">
+      <div className="relative group h-[300px] w-full">
         <SyntaxHighlighter
           customStyle={{
             borderBottomLeftRadius: "0.5rem",
@@ -94,6 +94,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             fontWeight: "bold",
             margin: 0,
             height: "100%",
+            fontSize: ".8rem",
           }}
           language="javascript"
           style={coldarkCold}
@@ -102,7 +103,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
         </SyntaxHighlighter>
         <Copy
           onClick={onCopyCode}
-          className="absolute top-2 right-2 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"
+          className="absolute top-2 right-6 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"
         />
       </div>
       <PopConfirm
