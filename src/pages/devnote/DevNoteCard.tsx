@@ -6,6 +6,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useToast } from "@/components/ui/use-toast";
 import { devNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
@@ -61,7 +66,16 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     <div className="border rounded-tl-md rounded-tr-md mb-2">
       <div className="flex items-start justify-between">
         <div className="p-2">
-          <p className="font-semibold">{truncateString(title)}</p>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <p className="font-semibold cursor-default">
+                {truncateString(title)}
+              </p>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{title}</p>
+            </TooltipContent>
+          </Tooltip>
           <Badge>{category}</Badge>
           <p className="text-xs">
             Date Created: {moment(date_created).format("LLL")}
