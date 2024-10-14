@@ -28,10 +28,10 @@ import {
   useCreateDevNote,
   useUpdateDevNote,
 } from "@/services/devnote/mutations";
-import { useGetDevNoteCategories } from "@/services/devnote/queries";
 import { CircleX } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Label } from "./ui/label";
+import CategorySelectFilter from "./category-select-filter";
 
 type TDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
 
@@ -91,7 +91,6 @@ const CreateUpdateNoteModal = ({
     mutate: updateDevNoteMutation,
     isPending: isUpdateDevNoteMutaionPending,
   } = useUpdateDevNote(onClearFormInputs);
-  const { data: categoriesData } = useGetDevNoteCategories(false);
 
   const form = useForm<z.infer<typeof CreateUpdateNoteSchema>>({
     resolver: zodResolver(CreateUpdateNoteSchema),
@@ -175,7 +174,6 @@ const CreateUpdateNoteModal = ({
               </FormItem>
             )}
           />
-
           {/* Category */}
           {!isSelectedCategoryOthers && (
             <FormField
@@ -195,11 +193,7 @@ const CreateUpdateNoteModal = ({
                     </FormControl>
                     <SelectContent>
                       <SelectGroup>
-                        {categoriesData?.map((category: string) => (
-                          <SelectItem key={category} value={category}>
-                            {category}
-                          </SelectItem>
-                        ))}
+                        <CategorySelectFilter />
                         <SelectItem value="Others">
                           Add Custom Category
                         </SelectItem>
