@@ -250,7 +250,7 @@ const CreateUpdateNoteModal = ({
             <FormLabel>Code Snippet</FormLabel>
             <Editor
               height="40vh"
-              defaultLanguage="javascript"
+              defaultLanguage={selectedCategoryValue?.toLowerCase()}
               theme="vs-dark"
               value={customFormInputs.noteContent}
               options={{
