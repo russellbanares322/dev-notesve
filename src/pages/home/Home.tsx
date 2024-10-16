@@ -82,7 +82,7 @@ const Home = () => {
           </Button>
         </div>
       )}
-      <div className="mt-10 space-y-5 min-h-screen h-full">
+      <div className="mt-2 md:mt-10 space-y-5 min-h-screen h-full">
         <div
           className={twMerge(
             makeFilterOptionSticky
@@ -106,7 +106,6 @@ const Home = () => {
             Create new note <FilePlus2 className="ml-1" />
           </Button>
         </div>
-        <hr />
         {/* Devnote Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
           {!isUserTyping &&

@@ -4,11 +4,6 @@ import SortFilter from "./filterOptions/SortFilter";
 import SearchFilter from "./filterOptions/SearchFilter";
 import { Button } from "@/components";
 import { ListFilter } from "lucide-react";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 
 type DevNoteFilterOptionsProps = {
   onSelectSortDirection: (value: SortDirectionValue) => void;
@@ -55,18 +50,9 @@ const DevNoteFilterOptions = ({
         {filterComponents.map((item) => item.element)}
       </div>
       <div className="block md:hidden">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button size="icon" variant="outline">
-              <ListFilter />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            {filterComponents.map((item, index) => (
-              <div key={index}>{item.element}</div>
-            ))}
-          </PopoverContent>
-        </Popover>
+        <Button size="icon" variant="outline">
+          <ListFilter />
+        </Button>
       </div>
     </div>
   );
