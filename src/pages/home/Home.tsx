@@ -82,7 +82,7 @@ const Home = () => {
           </Button>
         </div>
       )}
-      <div className="mt-2 md:mt-10 space-y-5 min-h-screen h-full">
+      <div className="mt-2 space-y-5 min-h-screen h-full">
         <div
           className={twMerge(
             makeFilterOptionSticky

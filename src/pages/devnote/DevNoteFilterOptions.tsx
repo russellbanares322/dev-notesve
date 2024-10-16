@@ -4,6 +4,7 @@ import SortFilter from "./filterOptions/SortFilter";
 import SearchFilter from "./filterOptions/SearchFilter";
 import { Button } from "@/components";
 import { ListFilter } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 type DevNoteFilterOptionsProps = {
   onSelectSortDirection: (value: SortDirectionValue) => void;
@@ -44,15 +45,26 @@ const DevNoteFilterOptions = ({
     },
   ];
 
-  return (
-    <div>
-      <div className="hidden md:grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-10">
+  const alignedFilterComponents = () => {
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-2 lg:gap-10">
         {filterComponents.map((item) => item.element)}
       </div>
-      <div className="block md:hidden">
-        <Button size="icon" variant="outline">
-          <ListFilter />
-        </Button>
+    );
+  };
+
+  return (
+    <div>
+      <div className="hidden lg:block">{alignedFilterComponents()}</div>
+      <div className="block lg:hidden">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button size="icon" variant="outline">
+              <ListFilter />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left">{alignedFilterComponents()}</SheetContent>
+        </Sheet>
       </div>
     </div>
   );
