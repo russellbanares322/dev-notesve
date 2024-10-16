@@ -20,7 +20,8 @@ const CategorySelectFilter = ({
       label: item?.id?.toUpperCase(),
       value: item?.id?.toUpperCase(),
     }))
-    .filter((data) => !data.label.includes("FREEMARKER2"));
+    .filter((data) => !data.label.includes("FREEMARKER2"))
+    .sort((a, b) => a.label.localeCompare(b.label));
 
   const modifiedOption = forFilter
     ? [
