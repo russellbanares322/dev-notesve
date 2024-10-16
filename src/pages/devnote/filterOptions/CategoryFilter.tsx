@@ -23,7 +23,7 @@ const CategoryFilter = ({
     <div>
       <Label>Filter by category</Label>
       <Select onValueChange={onSelectCategory} value={category}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-full">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>

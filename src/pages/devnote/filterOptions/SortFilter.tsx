@@ -27,7 +27,7 @@ const SortFilter = ({
           onSelectSortDirection(value as SortDirectionValue)
         }
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-full">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
