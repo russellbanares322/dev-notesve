@@ -11,8 +11,8 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { useToast } from "@/components/ui/use-toast";
 import { devNoteCardActions } from "@/data/devnote-card-actions";
+import { onCopyTextToClipboard } from "@/lib/onCopyTextToClipboard";
 import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
@@ -31,27 +31,12 @@ const DevNoteCard = (props: DevNoteCardProps) => {
     category,
   };
 
-  const { toast } = useToast();
   const [openDeletePopConfirm, setOpenDeletePopConfirm] = useState(false);
   const [openUpdateNoteModal, setOpenUpdateNoteModal] = useState(false);
 
   const { mutate: deleteDevNoteMutation } = useDeleteDevNote(() =>
     setOpenDeletePopConfirm(false)
   );
-
-  const onCopyCode = () => {
-    try {
-      navigator.clipboard.writeText(content);
-      toast({
-        description: "Successfully copied code to clipboard",
-      });
-    } catch (error) {
-      toast({
-        description: "Failed to copy code",
-        variant: "destructive",
-      });
-    }
-  };
 
   const onActionClick = (key: string) => {
     if (key === "Delete") {
@@ -116,7 +101,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
           }}
         />
         <Copy
-          onClick={onCopyCode}
+          onClick={() => onCopyTextToClipboard(content)}
           className="absolute top-2 right-6 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"
         />
       </div>
