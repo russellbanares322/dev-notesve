@@ -16,11 +16,10 @@ import { devNoteCardActions } from "@/data/devnote-card-actions";
 import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
+import { Editor } from "@monaco-editor/react";
 import { Copy, Ellipsis } from "lucide-react";
 import moment from "moment";
 import { useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkCold } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
@@ -101,20 +100,21 @@ const DevNoteCard = (props: DevNoteCardProps) => {
         </DropdownMenu>
       </div>
       <div className="relative group h-[300px] w-full">
-        <SyntaxHighlighter
-          customStyle={{
-            borderBottomLeftRadius: "0.5rem",
-            borderBottomRightRadius: "0.5rem",
-            fontWeight: "bold",
-            margin: 0,
-            height: "100%",
-            fontSize: ".8rem",
+        <Editor
+          language={category.toLowerCase()}
+          theme="vs-dark"
+          value={content}
+          options={{
+            lineNumbers: "off",
+            wordWrap: "on",
+            readOnly: true,
+            fontSize: 12,
+            minimap: {
+              enabled: false,
+            },
+            folding: false,
           }}
-          language="javascript"
-          style={coldarkCold}
-        >
-          {`${content}`}
-        </SyntaxHighlighter>
+        />
         <Copy
           onClick={onCopyCode}
           className="absolute top-2 right-6 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"

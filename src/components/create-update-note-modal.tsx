@@ -133,7 +133,6 @@ const CreateUpdateNoteModal = ({
   };
 
   //Set a value for inputs if it is for update
-
   useEffect(() => {
     if (isDataForUpdate) {
       form.setValue("title", dataForUpdate.title);
@@ -254,7 +253,7 @@ const CreateUpdateNoteModal = ({
               theme="vs-dark"
               value={customFormInputs.noteContent}
               options={{
-                lineNumbers: "off",
+                lineNumbers: "on",
                 wordWrap: "on",
               }}
               className="rounded-md"
