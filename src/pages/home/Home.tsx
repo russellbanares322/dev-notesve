@@ -17,7 +17,6 @@ import { useTheme } from "@/context/theme-provider";
 import { useDebounce } from "@/hooks";
 import { Skeleton } from "@/components/ui/skeleton";
 
-//Store editor languages in backend
 const Home = () => {
   const { user } = useUser();
   const [sortDirection, setSortDirection] = useState<SortDirectionValue>("1");
