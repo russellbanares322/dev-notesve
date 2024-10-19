@@ -17,7 +17,7 @@ import { truncateString } from "@/lib/truncateString";
 import { useDeleteDevNote } from "@/services/devnote/mutations";
 import { DevNotes } from "@/services/devnote/types";
 import { Editor } from "@monaco-editor/react";
-import { Copy, Ellipsis } from "lucide-react";
+import { ClipboardCopy, Ellipsis } from "lucide-react";
 import moment from "moment";
 import { useState } from "react";
 
@@ -100,10 +100,14 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             folding: false,
           }}
         />
-        <Copy
-          onClick={() => onCopyTextToClipboard(content)}
-          className="absolute top-2 right-6 text-black cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out bg-slate-200"
-        />
+        <div className="flex items-center gap-1 absolute top-2 right-6 cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out">
+          <p className="text-xs text-white">Copy Code</p>
+          <ClipboardCopy
+            size={15}
+            onClick={() => onCopyTextToClipboard(content)}
+            className="text-white"
+          />
+        </div>
       </div>
       <PopConfirm
         open={openDeletePopConfirm}
