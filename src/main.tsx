@@ -25,8 +25,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           <QueryClientProvider client={queryClient}>
             <TooltipProvider>
               <App />
+              <Toaster />
             </TooltipProvider>
-            <Toaster />
           </QueryClientProvider>
         </BrowserRouter>
       </ThemeProvider>
