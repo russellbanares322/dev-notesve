@@ -33,12 +33,14 @@ const DevNoteCard = (props: DevNoteCardProps) => {
 
   const [openDeletePopConfirm, setOpenDeletePopConfirm] = useState(false);
   const [openUpdateNoteModal, setOpenUpdateNoteModal] = useState(false);
+  const [openDropdownMenu, setOpenDropdownMenu] = useState(false);
 
   const { mutate: deleteDevNoteMutation } = useDeleteDevNote(() =>
     setOpenDeletePopConfirm(false)
   );
 
   const onActionClick = (key: string) => {
+    setOpenDropdownMenu(false);
     if (key === "Delete") {
       return setOpenDeletePopConfirm(true);
     }
@@ -65,8 +67,11 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             Date Created: {moment(date_created).format("LLL")}
           </p>
         </div>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+        <DropdownMenu
+          open={openDropdownMenu}
+          onOpenChange={setOpenDropdownMenu}
+        >
+          <DropdownMenuTrigger>
             <Button variant="ghost" size="sm">
               <Ellipsis />
             </Button>
