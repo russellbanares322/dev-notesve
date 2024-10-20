@@ -16,7 +16,8 @@ export const useCreateDevNote = (onClearFormInputs: () => void) => {
             queryClient.invalidateQueries({ queryKey: ["Devnotes"] })
         },
         onError:(response: QueryError) => {
-            showToast("error", "Failed to create note", response?.response?.data?.errorMessage)
+            const formattedErrorDescription = response?.response?.data?.errorMessage?.replace(/"/g, '')as string
+            showToast("error", "Failed to create note", formattedErrorDescription)
         }
     })
 }
