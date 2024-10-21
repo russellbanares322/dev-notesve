@@ -18,11 +18,16 @@ const Pagination = ({
     Math?.ceil(totalPages / pageSize)
   )?.fill("");
 
+  const handleChangePageNumber = (selectedPageNumber: number) => {
+    window.scroll(0, 0);
+    onPageNumberChange(selectedPageNumber);
+  };
+
   return (
     <div className="flex items-center gap-1 justify-center pt-10">
       <Button
         disabled={pageNumber === 1}
-        onClick={() => onPageNumberChange(pageNumber - 1)}
+        onClick={() => handleChangePageNumber(pageNumber - 1)}
         variant="outline"
       >
         <ChevronLeft />
@@ -32,7 +37,7 @@ const Pagination = ({
         return (
           <Button
             key={index}
-            onClick={() => onPageNumberChange(buttonIndex)}
+            onClick={() => handleChangePageNumber(buttonIndex)}
             variant={pageNumber === buttonIndex ? "default" : "outline"}
           >
             {buttonIndex}
@@ -40,7 +45,7 @@ const Pagination = ({
         );
       })}
       <Button
-        onClick={() => onPageNumberChange(pageNumber + 1)}
+        onClick={() => handleChangePageNumber(pageNumber + 1)}
         variant="outline"
         disabled={paginationButtonNumberCount.length === pageNumber}
       >
