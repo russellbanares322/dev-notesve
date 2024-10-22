@@ -36,7 +36,7 @@ function App() {
       </Route>
     ));
   };
-
+  console.log("TESTING");
   return (
     <div>
       {/* Show main page when user is authenticated */}

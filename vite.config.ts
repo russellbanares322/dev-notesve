@@ -3,7 +3,13 @@ import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
  
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react()], build: {
+    rollupOptions: {
+      output: {
+        chunkFileNames: `[name].[hash].js`,
+      },
+    },
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
