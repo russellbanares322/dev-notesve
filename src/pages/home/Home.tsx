@@ -76,7 +76,7 @@ const Home = () => {
       {search === "" && !data && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />
-          <h1 className="text-xl">Browse or create new notexx</h1>
+          <h1 className="text-xl">Browse or create new note</h1>
           <Button onClick={handleOpenCreateUpdateNoteModal}>
             Create new note <FilePlus2 className="ml-1" />
           </Button>
