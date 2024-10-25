@@ -105,13 +105,14 @@ const DevNoteCard = (props: DevNoteCardProps) => {
             folding: false,
           }}
         />
-        <div className="flex items-center gap-1 absolute top-2 right-6 cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out">
-          <p className="text-xs text-white">Copy Code</p>
-          <ClipboardCopy
-            size={15}
-            onClick={() => onCopyTextToClipboard(content)}
-            className="text-white"
-          />
+        <div className="flex items-center gap-1 absolute top-4 right-5 cursor-pointer scale-0 group-hover:scale-100 duration-150 ease-in-out">
+          <div className="flex items-center gap-1 text-gray-400 hover:text-white hover:bg-gray-400 p-1 rounded-sm duration-150 ease-in-out">
+            <p className="text-xs">Copy Code</p>
+            <ClipboardCopy
+              size={15}
+              onClick={() => onCopyTextToClipboard(content)}
+            />
+          </div>
         </div>
       </div>
       <PopConfirm
