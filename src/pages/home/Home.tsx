@@ -109,7 +109,6 @@ const Home = () => {
         {/* Devnote Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
           {!isUserTyping &&
-            search === "" &&
             !isDataEmpty &&
             data?.items?.map((item) => <DevNoteCard {...item} />)}
           {(isUserTyping || isFetching) &&
