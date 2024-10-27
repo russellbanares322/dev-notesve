@@ -47,7 +47,7 @@ const DevNoteCard = (props: DevNoteCardProps) => {
 
     return setOpenUpdateNoteModal(true);
   };
-  // Implement new sidebar
+
   return (
     <div className="border rounded-tl-md rounded-tr-md mb-2">
       <div className="flex items-start justify-between">
