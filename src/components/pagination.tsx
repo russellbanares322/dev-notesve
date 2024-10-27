@@ -19,7 +19,6 @@ const Pagination = ({
   )?.fill("");
 
   const handleChangePageNumber = (selectedPageNumber: number) => {
-    window.scroll(0, 0);
     onPageNumberChange(selectedPageNumber);
   };
 
