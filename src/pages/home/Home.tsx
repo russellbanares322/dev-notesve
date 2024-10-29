@@ -57,7 +57,6 @@ const Home = () => {
   };
 
   const onPageNumberChange = (selectedPageNumber: number) => {
-    window.scroll(0, 0);
     setPageNumber(selectedPageNumber);
   };
 
