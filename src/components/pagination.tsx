@@ -19,8 +19,12 @@ const Pagination = ({
   )?.fill("");
 
   const handleChangePageNumber = (selectedPageNumber: number) => {
-    window.scroll(0, 0);
+    const scrollUpTimeout = setTimeout(() => {
+      window.scroll(0, 0);
+    }, 100);
     onPageNumberChange(selectedPageNumber);
+
+    return () => clearTimeout(scrollUpTimeout);
   };
 
   return (
