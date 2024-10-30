@@ -112,7 +112,6 @@ const Home = () => {
             !isDataEmpty &&
             data?.items?.map((item) => <DevNoteCard {...item} />)}
           {(isUserTyping || isFetching) &&
-            !isDataEmpty &&
             Array.from({ length: 5 })
               .fill("")
               .map((_, index) => (

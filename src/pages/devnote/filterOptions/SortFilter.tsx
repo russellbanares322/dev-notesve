@@ -32,8 +32,8 @@ const SortFilter = ({
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="0">Ascending</SelectItem>
-            <SelectItem value="1">Descending</SelectItem>
+            <SelectItem value="0">Oldest</SelectItem>
+            <SelectItem value="1">Newest</SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
