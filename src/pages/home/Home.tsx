@@ -53,7 +53,7 @@ const Home = () => {
   };
 
   const onMakeFilterOptionSticky = () => {
-    return setMakeFilterOptionSticky(window.scrollY > 130);
+    setMakeFilterOptionSticky(window.scrollY > 130);
   };
 
   const onPageNumberChange = (selectedPageNumber: number) => {
