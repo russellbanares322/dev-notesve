@@ -73,7 +73,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen h-full">
-      {search === "" && !data && (
+      {search === "" && isDataEmpty && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />
           <h1 className="text-xl">Browse or create new note.</h1>
