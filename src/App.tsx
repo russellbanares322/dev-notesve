@@ -17,7 +17,7 @@ function App() {
         last_name: user?.lastName as string,
       });
     }
-  }, []);
+  }, [isSignedIn]);
 
   const renderRoutes = () => {
     return routes.map((route) => (
