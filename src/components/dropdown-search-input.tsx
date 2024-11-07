@@ -21,6 +21,7 @@ type DataSource = {
   label: string;
   value: string | number | boolean;
 };
+
 type DropdownSearchInputProps = {
   dataSource: DataSource[];
   selectedValue: string | number | boolean;
