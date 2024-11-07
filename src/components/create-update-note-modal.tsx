@@ -14,15 +14,7 @@ import {
 import { DevNotes } from "@/services/devnote/types";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
-import Editor from "@monaco-editor/react";
+import Editor, { useMonaco } from "@monaco-editor/react";
 import { useUser } from "@clerk/clerk-react";
 import {
   useCreateDevNote,
@@ -31,7 +23,7 @@ import {
 import { CircleX } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Label } from "./ui/label";
-import CategorySelectFilter from "./category-select-filter";
+import DropdownSearchInput from "./dropdown-search-input";
 
 type TDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
 
@@ -51,6 +43,11 @@ type CreateUpdateNoteModalProps = {
 } & ConditionalProps;
 
 type CreateNoteInputs = Pick<DevNotes, "title" | "category">;
+
+type MonacoLanguagesOption = {
+  label: string;
+  value: string;
+};
 
 const CreateUpdateNoteSchema = z.object({
   title: z.string({
@@ -73,9 +70,19 @@ const CreateUpdateNoteModal = ({
   dataForUpdate,
 }: CreateUpdateNoteModalProps) => {
   const { user } = useUser();
+  const monacoEditorOptions = useMonaco();
   const [customFormInputs, setCustomFormInputs] = useState(
     CUSTOM_FORM_INPUTS_DATA
   );
+
+  const formattedMonacoEditorLanguages = monacoEditorOptions?.languages
+    ?.getLanguages()
+    ?.map((item) => ({
+      label: item?.id?.toUpperCase(),
+      value: item?.id?.toUpperCase(),
+    }))
+    .filter((data) => !data.label.includes("FREEMARKER2"))
+    .sort((a, b) => a.label.localeCompare(b.label)) as MonacoLanguagesOption[];
 
   // Implement auto populate of each field once edit button is clicked
   const onClearFormInputs = () => {
@@ -179,26 +186,16 @@ const CreateUpdateNoteModal = ({
               control={form.control}
               name="category"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex flex-col">
                   <FormLabel>Category</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Please select the category of your note..." />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectGroup>
-                        <CategorySelectFilter />
-                        <SelectItem value="Others">
-                          Add Custom Category
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                  <DropdownSearchInput
+                    dataSource={formattedMonacoEditorLanguages}
+                    onSelectValue={(currentValue) => {
+                      form.setValue("category", currentValue as string);
+                    }}
+                    selectedValue={field.value}
+                    placeholder="Search or select category..."
+                  />
                   <FormMessage />
                 </FormItem>
               )}

@@ -9,7 +9,7 @@ import CreateUpdateNoteModal from "./create-update-note-modal";
 import Pagination from "./pagination";
 import PopConfirm from "./pop-confirm";
 import CategorySelectFilter from "./category-select-filter";
-import CategorySearchInputDropdown from "./category-search-input-dropdown";
+import DropdownSearchInput from "./dropdown-search-input";
 
 
-export { Button, CategorySelectFilter, CategorySearchInputDropdown, ContentWrapper, CreateUpdateNoteModal, Footer, ModeToggle, SignInButton, AppLogo, DevNotesFileDisplay, Pagination, PopConfirm }
+export { Button, CategorySelectFilter, DropdownSearchInput, ContentWrapper, CreateUpdateNoteModal, Footer, ModeToggle, SignInButton, AppLogo, DevNotesFileDisplay, Pagination, PopConfirm }
