@@ -41,7 +41,6 @@ const Home = () => {
   const isDataEmpty = data?.items?.length === 0;
   const isDataSizeExceededPageSize = (data?.totalPages as number) > pageSize;
 
-  console.log(data);
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
   };
