@@ -18,3 +18,8 @@ export type QueryError = {
         data: ApiResponse<null>
     }
 }
+
+export type DataSource = {
+    label: string;
+    value: string | number | boolean;
+  };

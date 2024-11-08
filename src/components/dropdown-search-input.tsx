@@ -16,11 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useState } from "react";
-
-type DataSource = {
-  label: string;
-  value: string | number | boolean;
-};
+import { DataSource } from "@/types/types";
 
 type DropdownSearchInputProps = {
   dataSource: DataSource[];

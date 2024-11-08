@@ -24,6 +24,7 @@ import { CircleX } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Label } from "./ui/label";
 import DropdownSearchInput from "./dropdown-search-input";
+import { DataSource } from "@/types/types";
 
 type TDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
 
@@ -43,11 +44,6 @@ type CreateUpdateNoteModalProps = {
 } & ConditionalProps;
 
 type CreateNoteInputs = Pick<DevNotes, "title" | "category">;
-
-type MonacoLanguagesOption = {
-  label: string;
-  value: string;
-};
 
 const CreateUpdateNoteSchema = z.object({
   title: z.string({
@@ -82,7 +78,7 @@ const CreateUpdateNoteModal = ({
       value: item?.id?.toUpperCase(),
     }))
     .filter((data) => !data.label.includes("FREEMARKER2"))
-    .sort((a, b) => a.label.localeCompare(b.label)) as MonacoLanguagesOption[];
+    .sort((a, b) => a.label.localeCompare(b.label)) as DataSource[];
 
   // Implement auto populate of each field once edit button is clicked
   const onClearFormInputs = () => {
