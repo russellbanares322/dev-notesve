@@ -39,7 +39,9 @@ const Home = () => {
     page_number: pageNumber,
   });
   const isDataEmpty = data?.items?.length === 0;
+  const isDataSizeExceededPageSize = (data?.totalPages as number) > pageSize;
 
+  console.log(data);
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
   };
@@ -121,7 +123,7 @@ const Home = () => {
                 />
               ))}
         </div>
-        {!isDataEmpty && data && (
+        {!isDataEmpty && data && isDataSizeExceededPageSize && (
           <Pagination
             pageNumber={pageNumber}
             onPageNumberChange={onPageNumberChange}
