@@ -14,7 +14,7 @@ const SearchFilter = ({ onSearchChange, search }: SearchFilterProps) => {
         onChange={onSearchChange}
         value={search}
         type="text"
-        placeholder="Search here"
+        placeholder="Search here..."
       />
     </div>
   );

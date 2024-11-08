@@ -43,7 +43,7 @@ const DropdownSearchInput = ({
           className="justify-between"
         >
           {selectedValue
-            ? dataSource.find((data) => data.value === selectedValue)?.label
+            ? dataSource?.find((data) => data.value === selectedValue)?.label
             : placeholder}
           <ChevronsUpDown className="opacity-50" />
         </Button>

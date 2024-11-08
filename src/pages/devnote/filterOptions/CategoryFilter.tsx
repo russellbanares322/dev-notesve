@@ -1,13 +1,7 @@
+import { DropdownSearchInput } from "@/components";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useGetDevNoteCategories } from "@/services/devnote/queries";
+import { DataSource } from "@/types/types";
 
 type CategoryFilterProps = {
   onSelectCategory: (value: string) => void;
@@ -19,23 +13,20 @@ const CategoryFilter = ({
 }: CategoryFilterProps) => {
   const { data: categoriesData } = useGetDevNoteCategories(true);
 
+  const categoriesDataSource = categoriesData?.map((category) => ({
+    label: category,
+    value: category as string,
+  })) as DataSource[];
+
   return (
-    <div>
+    <div className="flex flex-col gap-2">
       <Label>Filter by category</Label>
-      <Select onValueChange={onSelectCategory} value={category}>
-        <SelectTrigger className="w-full">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            {categoriesData?.map((category) => (
-              <SelectItem key={category} value={category}>
-                {category}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <DropdownSearchInput
+        dataSource={categoriesDataSource}
+        onSelectValue={(value) => onSelectCategory(value as string)}
+        selectedValue={category}
+        placeholder="Select or search category"
+      />
     </div>
   );
 };
