@@ -5,6 +5,7 @@ type ContentWrapperProps = {
   children: React.ReactNode;
 };
 
+// Properly implement login authentication
 const ContentWrapper = ({ children }: ContentWrapperProps) => {
   return (
     <div className="flex flex-col min-h-screen h-full md:max-w-[1600px] mx-auto py-5 px-3 md:px-10 mt-2">
