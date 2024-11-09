@@ -3,7 +3,7 @@ const Footer = () => {
   return (
     <footer className="border-t py-2 flex items-center justify-center">
       <p>
-        {`All Rights Reserved`} &copy; {currentDate}
+        {`DevnoteSVE`} &copy; {currentDate}
       </p>
     </footer>
   );
