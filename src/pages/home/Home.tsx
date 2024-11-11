@@ -40,6 +40,7 @@ const Home = () => {
   });
   const isDataEmpty = data?.items?.length === 0;
   const isDataSizeExceededPageSize = (data?.totalPages as number) > pageSize;
+  const hasDataToDisplay = !isUserTyping && !isDataEmpty;
 
   const onSelectSortDirection = (value: SortDirectionValue) => {
     setSortDirection(value);
@@ -73,7 +74,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen h-full">
+    <div className="h-full">
       {search === "" && isDataEmpty && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />
@@ -83,34 +84,35 @@ const Home = () => {
           </Button>
         </div>
       )}
-      <div className="mt-2 space-y-5 min-h-screen h-full">
-        <div
-          className={twMerge(
-            makeFilterOptionSticky
-              ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 rounded-md shadow-md"
-              : "static w-full",
-            isDarkTheme ? "bg-background/95" : "bg-white/95",
-            "flex items-center justify-between z-10"
-          )}
-        >
-          {/* Devnote Filter Options */}
-          <DevNoteFilterOptions
-            onSelectSortDirection={onSelectSortDirection}
-            currentSelectedSortDirection={sortDirection}
-            onSelectCategory={onSelectCategory}
-            onSearchChange={onSearchChange}
-            category={category}
-            search={search}
-          />
-          {/* Add Devnote Button */}
-          <Button onClick={handleOpenCreateUpdateNoteModal}>
-            Create new note <FilePlus2 className="ml-1" />
-          </Button>
-        </div>
+      <div className="mt-2 space-y-5 h-full">
+        {hasDataToDisplay && (
+          <div
+            className={twMerge(
+              makeFilterOptionSticky
+                ? "fixed top-0 left-0 right-0 mx-0 lg:mx-[200px] p-2 rounded-md shadow-md"
+                : "static w-full",
+              isDarkTheme ? "bg-background/95" : "bg-white/95",
+              "flex items-center justify-between z-10"
+            )}
+          >
+            {/* Devnote Filter Options */}
+            <DevNoteFilterOptions
+              onSelectSortDirection={onSelectSortDirection}
+              currentSelectedSortDirection={sortDirection}
+              onSelectCategory={onSelectCategory}
+              onSearchChange={onSearchChange}
+              category={category}
+              search={search}
+            />
+            {/* Add Devnote Button */}
+            <Button onClick={handleOpenCreateUpdateNoteModal}>
+              Create new note <FilePlus2 className="ml-1" />
+            </Button>
+          </div>
+        )}
         {/* Devnote Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
-          {!isUserTyping &&
-            !isDataEmpty &&
+          {hasDataToDisplay &&
             data?.items?.map((item) => <DevNoteCard {...item} />)}
           {(isUserTyping || isFetching) &&
             Array.from({ length: 5 })
