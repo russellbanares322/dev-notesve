@@ -5,7 +5,7 @@ export type DevNotes = {
     title: string
     category: string
     content: string
-    author_id: string
+    user_id: string
     date_created: string
 }
 
@@ -13,7 +13,7 @@ export type SortDirectionValue = "0" | "1"
 
 export type GetDevNotesByAuthorIdParams = {
     search?: string,
-    author_id: string,
+    user_id: string,
     sort_direction: SortDirectionValue
     category: string;
     page_size: number;
@@ -24,10 +24,10 @@ export type CreateDevNoteParams = {
     title: string,
     category: string,
     content: string,
-    author_id: string
+    user_id: string
 }
 
-export type UpdateDevNoteParams = Omit<CreateDevNoteParams, "author_id"> & {
+export type UpdateDevNoteParams = Omit<CreateDevNoteParams, "user_id"> & {
     id: number
 }
 

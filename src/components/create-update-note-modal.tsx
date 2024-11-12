@@ -26,7 +26,7 @@ import { Label } from "./ui/label";
 import DropdownSearchInput from "./dropdown-search-input";
 import { DataSource } from "@/types/types";
 
-type TDataForUpdate = Omit<DevNotes, "date_created" | "author_id">;
+type TDataForUpdate = Omit<DevNotes, "date_created" | "user_id">;
 
 type ConditionalProps =
   | {
@@ -109,7 +109,7 @@ const CreateUpdateNoteModal = ({
           ? customFormInputs.customCategory
           : data?.category,
       content: customFormInputs?.noteContent,
-      author_id: user?.id as string,
+      user_id: user?.id as string,
     };
 
     if (!isDataForUpdate) {

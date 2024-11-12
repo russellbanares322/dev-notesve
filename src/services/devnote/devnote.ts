@@ -6,7 +6,7 @@ export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams)
     const config = {
         params: {
             search: params.search,
-            author_id: params.author_id,
+            user_id: params.user_id,
             sort_direction: params.sort_direction,
             category: params.category,
             page_size: params.page_size,
@@ -19,10 +19,10 @@ export const getDevNotesByAuthorId = async (params: GetDevNotesByAuthorIdParams)
     return response.data
 }
 
-export const getDevNoteCategories = async (author_id: string): Promise<DevNotesCategories> => {
+export const getDevNoteCategories = async (user_id: string): Promise<DevNotesCategories> => {
     const config = {
         params: {
-            author_id: author_id
+            user_id: user_id
         }
     }
 

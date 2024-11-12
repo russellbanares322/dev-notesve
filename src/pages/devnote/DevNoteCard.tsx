@@ -24,7 +24,7 @@ import { useState } from "react";
 type DevNoteCardProps = DevNotes;
 const DevNoteCard = (props: DevNoteCardProps) => {
   const { devnote_id, title, content, date_created, category } = props;
-  const dataForUpdateValue: Omit<DevNotes, "date_created" | "author_id"> = {
+  const dataForUpdateValue: Omit<DevNotes, "date_created" | "user_id"> = {
     devnote_id,
     title,
     content,

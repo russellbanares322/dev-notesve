@@ -32,7 +32,7 @@ const Home = () => {
 
   const { data, isFetching } = useGetDevNotesByAuthorId({
     search: debouncedValue,
-    author_id: user?.id as string,
+    user_id: user?.id as string,
     sort_direction: sortDirection,
     category: category === "ALL" ? "" : category,
     page_size: pageSize,
@@ -74,7 +74,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="h-full">
+    <div className="h-full min-h-screen">
       {search === "" && isDataEmpty && (
         <div className="flex flex-col items-center justify-center gap-5 min-h-screen">
           <AppLogo />

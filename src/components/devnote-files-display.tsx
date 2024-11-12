@@ -13,7 +13,7 @@ type DevNotesFileDisplayProps = {
 const DevNotesFileDisplay = ({ category }: DevNotesFileDisplayProps) => {
   const { user } = useUser();
   const { data } = useGetDevNotesByAuthorId({
-    author_id: user?.id as string,
+    user_id: user?.id as string,
     sort_direction: "0" as SortDirectionValue,
     category: "",
     page_size: 10,
