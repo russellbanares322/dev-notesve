@@ -8,6 +8,8 @@ import { useEffect } from "react";
 function App() {
   const { isSignedIn, user } = useUser();
   const { mutate: createUserMutation } = useCreateUser(user?.id as string);
+  const Authenticated = SignedIn;
+  const UnAuthenticated = SignedOut;
 
   useEffect(() => {
     if (isSignedIn) {
@@ -40,13 +42,13 @@ function App() {
   return (
     <div>
       {/* Show main page when user is authenticated */}
-      <SignedIn>
+      <Authenticated>
         <Routes>{renderRoutes()}</Routes>
-      </SignedIn>
+      </Authenticated>
       {/* Show login page when user is not authenticated */}
-      <SignedOut>
+      <UnAuthenticated>
         <SignInButton />
-      </SignedOut>
+      </UnAuthenticated>
       <ModeToggle />
     </div>
   );
