@@ -114,7 +114,8 @@ const Home = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-7 grid-flow-row auto-rows-fr">
           {hasDataToDisplay &&
             data?.items?.map((item) => <DevNoteCard {...item} />)}
-          {(isUserTyping || isFetching) &&
+          {isUserTyping &&
+            isFetching &&
             Array.from({ length: 5 })
               .fill("")
               .map((_, index) => (
